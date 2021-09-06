@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="15dp">
+
+        <ImageView
+            android:id="@+id/boxPreview"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/box_preview"
+            app:srcCompat="@drawable/cubeicon" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/boxTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/joystix"
+        android:textAlignment="center"
+        android:textColor="@color/dark"
+        android:textSize="24sp"
+        tools:text="xGucci" />
+
+    <TextView
+        android:id="@+id/boxPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        tools:text="4200 руб." />
+</LinearLayout>

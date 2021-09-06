@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "620762822661",
+    "project_id": "zoomerbox-app",
+    "storage_bucket": "zoomerbox-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620762822661:android:3e555df79cc28bf19cc46c",
+        "android_client_info": {
+          "package_name": "com.zoomerbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620762822661-qmnn7rbp12heit9s1l87hunqo12i10lk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCul5a4UC7fnqSOciRadOMCu48BNGCZGAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620762822661-qmnn7rbp12heit9s1l87hunqo12i10lk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

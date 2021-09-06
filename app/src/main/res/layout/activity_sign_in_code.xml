@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="textStart"
+    tools:context=".presentation.view.activity.SignInCodeActivity">
+
+    <me.itangqi.waveloadingview.WaveLoadingView
+        android:id="@+id/waveProgressView"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:wlv_borderColor="@color/purple_200"
+        app:wlv_progressValue="80"
+        app:wlv_round_rectangle="true"
+        app:wlv_shapeType="rectangle"
+        app:wlv_triangle_direction="north"
+        app:wlv_waveAmplitude="50"
+        app:wlv_waveColor="@color/purple_200" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/verifyCodeBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/button_ripple"
+        android:fontFamily="@font/comfortaabold"
+        android:text="@string/verifyCodeBtn"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/smsCodeText" />
+
+    <ImageView
+        android:id="@+id/logoText2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="86dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.926"
+        app:srcCompat="@drawable/logotext" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/comfortaaregular"
+        android:text="@string/inputSmsCodeText"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/smsHint3"
+        app:layout_constraintTop_toBottomOf="@+id/smsHint3" />
+
+    <TextView
+        android:id="@+id/smsHint3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/comfortaabold"
+        android:text="@string/verifyCode"
+        android:textColor="@color/dark"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/smsCodeText"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bordered_shape"
+        android:digits="0123456789"
+        android:ems="6"
+        android:fontFamily="@font/comfortaaregular"
+        android:inputType="number"
+        android:maxLength="6"
+        android:padding="15dp"
+        android:textColorHighlight="@color/purple_700"
+        android:textColorLink="@color/purple_700"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:text="123456" />
+
+    <TextView
+        android:id="@+id/sendOnceMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:autoLink="web"
+        android:fontFamily="@font/comfortamedium"
+        android:text="@string/sendOnceMore"
+        android:textColor="@color/teal_200"
+        android:textColorLink="@color/teal_200"
+        app:layout_constraintStart_toStartOf="@+id/verifyCodeBtn"
+        app:layout_constraintTop_toBottomOf="@+id/verifyCodeBtn" />
+
+    <TextView
+        android:id="@+id/codeErrorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/comfortamedium"
+        android:textColor="@color/purple_200"
+        app:layout_constraintStart_toStartOf="@+id/sendOnceMore"
+        app:layout_constraintTop_toBottomOf="@+id/sendOnceMore"
+        tools:text="Только не ошибки..." />
+</androidx.constraintlayout.widget.ConstraintLayout>

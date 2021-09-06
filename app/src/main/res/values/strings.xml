@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">zoomerbox</string>
+    <string name="smsSignInText">Вход по СМС</string>
+    <string name="verifyCode">Подтвердите код из СМС</string>
+    <string name="inputPhoneNumberText">Введите номер мобильного телефона. Мы отправим одноразовый код в СМС.</string>
+    <string name="inputSmsCodeText">Введите 6-значный код, который пришёл на ваш телефон.</string>
+    <string name="smsSignInDisclaimerText">Запросив код, вы принимаете пользовательское соглашение и политику конфиденциальности магазина.</string>
+    <string name="getSmsCodeText">Получить код</string>
+    <string name="verifyCodeBtn">Подтвердить код</string>
+    <string name="phoneCodePlacheloder">+7</string>
+    <string name="sendOnceMore">Отправить еще раз</string>
+    <string name="shop_icon">shop_icon</string>
+    <string name="trolley_icon">trolley_icon</string>
+    <string name="user_icon">user_icon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="box_preview">Box preview</string>
+</resources>
