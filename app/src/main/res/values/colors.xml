@@ -8,4 +8,5 @@
     <color name="teal_900">#104A00</color>
     <color name="dark">#181818</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="material_grey_50">#fffafafa</color>
 </resources>

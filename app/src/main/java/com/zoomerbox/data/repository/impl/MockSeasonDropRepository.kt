@@ -6,16 +6,18 @@ import com.zoomerbox.model.dto.CollectionDTO
 import com.zoomerbox.model.dto.SeasonDropDTO
 import com.zoomerbox.model.dto.ZoomerBoxDTO
 import com.zoomerbox.model.enumeration.RarenessEnum
+import com.zoomerbox.model.item.SeasonDropItem
 
 class MockSeasonDropRepository : ISeasonDropRepository {
 
-    override fun getSeasonDrop(): SeasonDropDTO {
-        return SeasonDropDTO(
-            0,
-            "Моксезон",
-            "http://sun9-14.userapi.com/impg/c858020/v858020227/21d0a9/a0Zk6RVegvY" +
-                    ".jpg?size=960x686&quality=96&sign=ec21464694ca9257d37c176ce1fd8418&type=album",
-            getCollections()
+    override fun getSeasonDrop(): SeasonDropItem {
+        return SeasonDropItem.buildFromDTO(
+            SeasonDropDTO(
+                0,
+                "Моксезон",
+                "https://cdn.vox-cdn.com/thumbor/BcRyrvD1-ym1dzBgoer3GudBb8Q=/0x0:848x926/1200x800/filters:focal(357x533:491x667)/cdn.vox-cdn.com/uploads/chorus_image/image/69764737/E44h7SmUYAAOGxd.0.jpg",
+                getCollections()
+            )
         )
     }
 
@@ -25,25 +27,25 @@ class MockSeasonDropRepository : ISeasonDropRepository {
 
     private fun getCollections(): List<CollectionDTO> {
         val gearBoxCollection = CollectionDTO(
-            "Гирбокс",
-            getBoxes(listOf("X_GUCCI, X_BALENCIAGA", "X_ADIDAS", "X_NIKE"))
+            "Gearbox",
+            getBoxes(listOf("X_GUCCI", "X_BALENCIAGA", "X_ADIDAS", "X_NIKE"))
         )
         val geekBoxCollection = CollectionDTO(
-            "Гикбокс",
-            getBoxes(listOf("X_MARVEL, X_DC", "X_BUBBLECOMICS", "X_LUCASFILM"))
+            "Geekbox",
+            getBoxes(listOf("X_MARVEL", "X_DC", "X_BUBBLECOMICS", "X_LUCASFILM"))
         )
         val snackBoxCollection = CollectionDTO(
-            "Снекбокс",
-            getBoxes(listOf("X_SNICKERS, X_CHEETOS", "X_ANIMECHOCOLATE", "X_KEKSNACK"))
+            "Snackbox",
+            getBoxes(listOf("X_SNICKERS", "X_CHEETOS", "X_ANIMECHOCOLATE", "X_KEKSNACK"))
         )
         val beautyBoxCollection = CollectionDTO(
-            "Бьютибокс",
-            getBoxes(listOf("X_CHANEL, X_MAYBELLINE", "X_L'OREAL", "X_BOBBIBROWN"))
+            "Beautybox",
+            getBoxes(listOf("X_CHANEL", "X_MAYBELLINE", "X_L'OREAL", "X_BOBBIBROWN"))
         )
         return listOf(
-            gearBoxCollection,
             geekBoxCollection,
             snackBoxCollection,
+            gearBoxCollection,
             beautyBoxCollection
         )
     }
@@ -55,6 +57,7 @@ class MockSeasonDropRepository : ISeasonDropRepository {
                 ZoomerBoxDTO(
                     name = names[i],
                     imageUrls = getMockBoxImageUrls(),
+                    price = getMockPrice(),
                     description = getMockBoxDescription(),
                     items = getItems(),
                     rareItems = getRareItems()
@@ -92,6 +95,10 @@ class MockSeasonDropRepository : ISeasonDropRepository {
             )
         }
         return items
+    }
+
+    private fun getMockPrice(): String {
+        return "420 руб"
     }
 
     private fun getMockItemImageUrls(): List<String> {

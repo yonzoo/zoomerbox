@@ -23,6 +23,8 @@
         android:id="@+id/collectionCollabBoxList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        android:background="#F5F5F5" />
+        android:layout_marginTop="8dp"
+        android:background="#F5F5F5"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
 </LinearLayout>

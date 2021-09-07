@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    android:backgroundTint="#FFFFFF"
-    android:orientation="vertical">
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -17,29 +19,32 @@
 
         <ImageView
             android:id="@+id/boxPreview"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             android:contentDescription="@string/box_preview"
             app:srcCompat="@drawable/cubeicon" />
     </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/boxTitle"
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:fontFamily="@font/joystix"
+        android:ellipsize="end"
+        android:fontFamily="@font/comfortaaregular"
+        android:maxLines="1"
         android:textAlignment="center"
         android:textColor="@color/dark"
-        android:textSize="24sp"
+        android:textSize="16sp"
         tools:text="xGucci" />
 
     <TextView
         android:id="@+id/boxPrice"
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:fontFamily="@font/comfortaalight"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="14sp"
         tools:text="4200 руб." />
 </LinearLayout>

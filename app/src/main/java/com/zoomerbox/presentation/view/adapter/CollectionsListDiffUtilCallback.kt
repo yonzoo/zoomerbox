@@ -1,11 +1,11 @@
 package com.zoomerbox.presentation.view.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.zoomerbox.model.dto.CollectionDTO
+import com.zoomerbox.model.item.CollectionItem
 
 class CollectionsListDiffUtilCallback(
-    private val oldCollections: List<CollectionDTO>,
-    private val newCollections: List<CollectionDTO>
+    private val oldCollections: List<CollectionItem>,
+    private val newCollections: List<CollectionItem>
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {

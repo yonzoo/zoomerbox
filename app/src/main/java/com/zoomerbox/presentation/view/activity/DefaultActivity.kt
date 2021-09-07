@@ -22,7 +22,6 @@ class DefaultActivity : AppCompatActivity() {
             startActivity(SignInActivity.newIntent(this))
         } else {
             startActivity(MainActivity.newIntent(this))
-            Toast.makeText(this, "Already Signed in ", Toast.LENGTH_LONG).show()
         }
     }
 }

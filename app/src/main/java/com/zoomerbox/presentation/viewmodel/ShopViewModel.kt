@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import com.zoomerbox.data.repository.ISeasonDropRepository
 import com.zoomerbox.model.dto.SeasonDropDTO
+import com.zoomerbox.model.item.SeasonDropItem
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 
@@ -18,7 +19,7 @@ class ShopViewModel(
 
     private val progressLiveData = MutableLiveData<Boolean>()
     private val errorLiveData = MutableLiveData<Throwable>()
-    private val seasonDropLiveData = MutableLiveData<SeasonDropDTO>()
+    private val seasonDropLiveData = MutableLiveData<SeasonDropItem>()
     private var disposable: Disposable? = null
 
     fun loadSeasonDrop() {
@@ -56,7 +57,7 @@ class ShopViewModel(
         return errorLiveData
     }
 
-    fun getSeasonDropLiveData(): LiveData<SeasonDropDTO> {
+    fun getSeasonDropLiveData(): LiveData<SeasonDropItem> {
         return seasonDropLiveData
     }
 

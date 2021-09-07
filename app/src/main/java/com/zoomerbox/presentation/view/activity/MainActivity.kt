@@ -20,13 +20,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setListeners()
-    }
-
-    private fun setListeners() {
         val shopFragment = ShopFragment()
         val shoppingCartFragment = ShoppingCartFragment()
         val userFragment = UserFragment()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.mainWrapper, shopFragment)
+            addToBackStack(null)
+            commit()
+        }
+        setActiveIcon(binding.shopIcon)
+        setListeners(shopFragment, shoppingCartFragment, userFragment)
+    }
+
+    private fun setListeners(shopFragment: ShopFragment,
+                             shoppingCartFragment: ShoppingCartFragment,
+                             userFragment: UserFragment) {
         binding.shopIcon.setOnClickListener {
             setActiveFragment(shopFragment)
             setActiveIcon(binding.shopIcon)
@@ -46,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             when (fragment) {
                 is ShopFragment -> {
                     setCustomAnimations(
-                        R.anim.slide_in_left,
+                        R.anim.fade_in,
                         R.anim.fade_out,
                         R.anim.fade_in,
                         R.anim.slide_out
@@ -62,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> {
                     setCustomAnimations(
-                        R.anim.fade_in,
+                        R.anim.slide_in_left,
                         R.anim.fade_out,
                         R.anim.fade_in,
                         R.anim.slide_out

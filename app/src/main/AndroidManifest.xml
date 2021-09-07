@@ -5,9 +5,9 @@
     <application
         android:name=".ZoomerboxApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/v2cubeicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/v3cubeicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Zoomerboxapp">
         <activity
@@ -24,11 +24,6 @@
             android:name=".presentation.view.activity.SignInActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.view.activity.DefaultActivity"

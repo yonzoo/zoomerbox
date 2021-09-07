@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.FragmentShopBinding
 import com.zoomerbox.di.fragment.FragmentComponent
+import com.zoomerbox.model.enumeration.ShopListItemTypeEnum
+import com.zoomerbox.model.item.CollectionItem
+import com.zoomerbox.model.item.IShopListItem
 import com.zoomerbox.presentation.view.adapter.CollectionsListAdapter
 import com.zoomerbox.presentation.view.adapter.CollectionsListDiffUtilCallback
 import com.zoomerbox.presentation.viewmodel.ShopViewModel
@@ -49,14 +52,19 @@ class ShopFragment : Fragment() {
 
     private fun setObservers() {
         viewModel.getSeasonDropLiveData().observe(viewLifecycleOwner, { seasonDrop ->
-            val diffUtilCallback = CollectionsListDiffUtilCallback(
-                collectionsListAdapter.getData(),
+            val collectionsDiffUtilCallback = CollectionsListDiffUtilCallback(
+                collectionsListAdapter.getData()
+                    .filter { shopListItem -> shopListItem.getType() != ShopListItemTypeEnum.BANNER }
+                    .map { shopListItem -> shopListItem as CollectionItem },
                 seasonDrop.collections
             )
-            val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-            collectionsListAdapter.setData(seasonDrop.collections)
+            val collectionsDiffResult = DiffUtil.calculateDiff(collectionsDiffUtilCallback)
+            val newData: List<IShopListItem> =
+                listOf(seasonDrop.bannerItem, *seasonDrop.collections.toTypedArray())
+            collectionsListAdapter.setData(newData)
+            collectionsListAdapter.notifyItemChanged(0)
             if (!binding.collectionsList.isComputingLayout) {
-                diffResult.dispatchUpdatesTo(collectionsListAdapter)
+                collectionsDiffResult.dispatchUpdatesTo(collectionsListAdapter)
             }
         })
     }
