@@ -43,7 +43,6 @@ class ShopFragment : Fragment() {
         setObservers()
 
         //TODO add swipe layout to fragment so the list could be nicely updated
-        //TODO add lookup repository based on stage, for example if we are in 'mocking' stage, lookup all mock implementations instead of real ones
 
         viewModel.loadSeasonDrop()
 

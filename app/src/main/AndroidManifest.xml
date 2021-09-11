@@ -11,24 +11,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zoomerboxapp">
         <activity
+            android:name=".presentation.view.activity.BoxItemActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presentation.view.activity.ZoomerBoxActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".presentation.view.activity.SignInCodeActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.MainActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity -->
-        <!-- android:name=".presentation.view.activity.SignInActivity" -->
-        <!-- android:exported="true" /> -->
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.SignInActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.DefaultActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

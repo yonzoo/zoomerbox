@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemCollabBoxBinding
-import com.zoomerbox.model.dto.ZoomerBoxDTO
+import com.zoomerbox.model.item.ZoomerBoxItem
+import com.zoomerbox.presentation.view.activity.ZoomerBoxActivity
 
 class ZoomerBoxListAdapter(
-    private var zoomerBoxList: List<ZoomerBoxDTO>
+    private var zoomerBoxList: List<ZoomerBoxItem>
 ) : RecyclerView.Adapter<ZoomerBoxListAdapter.ViewHolder>() {
 
     lateinit var context: Context
@@ -35,11 +36,14 @@ class ZoomerBoxListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var itemBinding: ItemCollabBoxBinding = ItemCollabBoxBinding.bind(itemView)
 
-        fun bind(zoomerBox: ZoomerBoxDTO) {
+        fun bind(zoomerBox: ZoomerBoxItem) {
             itemBinding.boxTitle.text = zoomerBox.name
             itemBinding.boxPrice.text = zoomerBox.price
             if (zoomerBox.imageUrls.isNotEmpty()) {
                 Picasso.get().load(zoomerBox.imageUrls[0]).into(itemBinding.boxPreview)
+            }
+            itemBinding.collectionItem.setOnClickListener {
+                context.startActivity(ZoomerBoxActivity.newIntent(context, zoomerBox))
             }
         }
     }

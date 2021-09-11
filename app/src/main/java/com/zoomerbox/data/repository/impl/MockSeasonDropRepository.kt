@@ -60,7 +60,7 @@ class MockSeasonDropRepository : ISeasonDropRepository {
                     price = getMockPrice(),
                     description = getMockBoxDescription(),
                     items = getItems(),
-                    rareItems = getRareItems()
+                    possibleRareItems = getRareItems()
                 )
             )
         }
