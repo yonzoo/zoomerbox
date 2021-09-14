@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemBoxItemBinding
-import com.zoomerbox.model.item.BoxItemItem
+import com.zoomerbox.model.item.BoxItem
 import com.zoomerbox.presentation.view.activity.BoxItemActivity
 
 class BoxItemListAdapter(
-    private var boxItemList: List<BoxItemItem>,
+    private var boxItemList: List<BoxItem>,
     private var boxName: String
 ) : RecyclerView.Adapter<BoxItemListAdapter.ViewHolder>() {
 
@@ -37,7 +37,7 @@ class BoxItemListAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var itemBinding: ItemBoxItemBinding = ItemBoxItemBinding.bind(itemView)
 
-        fun bind(boxItem: BoxItemItem) {
+        fun bind(boxItem: BoxItem) {
             itemBinding.boxItemTitle.text = boxItem.name
             if (boxItem.imageUrls.isNotEmpty()) {
                 Picasso.get().load(boxItem.imageUrls[0]).into(itemBinding.boxItemPreview)

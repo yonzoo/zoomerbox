@@ -5,38 +5,38 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.zoomerbox.data.repository.IShoppingCartRepository
+import com.zoomerbox.model.item.ShoppingCartItem
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
-import com.zoomerbox.data.repository.ISeasonDropRepository
-import com.zoomerbox.model.item.SeasonDrop
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 
-class ShopViewModel(
-    @NonNull private val repository: ISeasonDropRepository,
+class ShoppingCartViewModel(
+    @NonNull private val repository: IShoppingCartRepository,
     @NonNull private val schedulersProvider: ISchedulersProvider
 ) : ViewModel() {
 
     private val progressLiveData = MutableLiveData<Boolean>()
     private val errorLiveData = MutableLiveData<Throwable>()
-    private val seasonDropLiveData = MutableLiveData<SeasonDrop>()
+    private val cartItemsLiveData = MutableLiveData<List<ShoppingCartItem>>()
     private var disposable: Disposable? = null
 
-    fun loadSeasonDrop() {
-        disposable = Single.fromCallable { repository.getSeasonDrop() }
+    fun loadShoppingCartItems() {
+        disposable = Single.fromCallable { repository.getShoppingCartItems() }
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())
             .observeOn(schedulersProvider.ui())
-            .subscribe({ drop ->
+            .subscribe({ cartItems ->
                 Log.d(
                     TAG,
-                    "${repository.getImplName()} successfully returned the season drop body: $drop"
+                    "${repository.getImplName()} successfully returned shopping cart items: $cartItems"
                 )
-                seasonDropLiveData.postValue(drop)
+                cartItemsLiveData.postValue(cartItems)
             }, { ex ->
                 Log.e(
                     TAG,
-                    "${repository.getImplName()} failed to return the season drop body with the exception: ${ex.message}"
+                    "${repository.getImplName()} failed to return the shopping cart items with the exception: ${ex.message}"
                 )
                 errorLiveData.postValue(ex)
             })
@@ -56,8 +56,8 @@ class ShopViewModel(
         return errorLiveData
     }
 
-    fun getSeasonDropLiveData(): LiveData<SeasonDrop> {
-        return seasonDropLiveData
+    fun getCartItemsLiveData(): LiveData<List<ShoppingCartItem>> {
+        return cartItemsLiveData
     }
 
     companion object {

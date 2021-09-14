@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ActivityZoomerBoxBinding
 import com.zoomerbox.model.item.SliderItem
-import com.zoomerbox.model.item.ZoomerBoxItem
+import com.zoomerbox.model.item.ZoomerBox
 import com.zoomerbox.presentation.view.adapter.BoxItemListAdapter
 import com.zoomerbox.presentation.view.adapter.SliderAdapter
 import com.zoomerbox.presentation.view.util.BundleKeys
@@ -20,7 +20,7 @@ import com.zoomerbox.presentation.view.util.BundleKeys
 class ZoomerBoxActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityZoomerBoxBinding
-    private lateinit var zoomerBoxItem: ZoomerBoxItem
+    private lateinit var zoomerBox: ZoomerBox
     private lateinit var dots: MutableList<TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,16 +28,16 @@ class ZoomerBoxActivity : AppCompatActivity() {
         binding = ActivityZoomerBoxBinding.inflate(layoutInflater)
         setContentView(binding.root)
         dots = mutableListOf()
-        zoomerBoxItem = intent.getParcelableExtra(BundleKeys.ZOOMER_BOX)!!
+        zoomerBox = intent.getParcelableExtra(BundleKeys.ZOOMER_BOX)!!
         setIndicators()
-        binding.boxItems.adapter = BoxItemListAdapter(zoomerBoxItem.items, zoomerBoxItem.name)
+        binding.boxItems.adapter = BoxItemListAdapter(zoomerBox.items, zoomerBox.name)
         binding.boxItems.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.zoomerBoxTitle.text = zoomerBoxItem.name
-        binding.priceText.text = zoomerBoxItem.price
-        binding.boxDescription.text = zoomerBoxItem.description
+        binding.zoomerBoxTitle.text = zoomerBox.name
+        binding.priceText.text = zoomerBox.price
+        binding.boxDescription.text = zoomerBox.description
         binding.imageSwitcher.adapter =
-            SliderAdapter(zoomerBoxItem.imageUrls.map { imageUrl -> SliderItem(imageUrl) }
+            SliderAdapter(zoomerBox.imageUrls.map { imageUrl -> SliderItem(imageUrl) }
                 .toMutableList())
         binding.imageSwitcher.clipToPadding = false
         binding.imageSwitcher.clipChildren = false
@@ -64,7 +64,7 @@ class ZoomerBoxActivity : AppCompatActivity() {
     }
 
     private fun setIndicators() {
-        for (i in zoomerBoxItem.imageUrls.indices) {
+        for (i in zoomerBox.imageUrls.indices) {
             val textView = TextView(this)
             textView.text = Html.fromHtml("&#9679;")
             textView.textSize = 18f
@@ -75,7 +75,7 @@ class ZoomerBoxActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun newIntent(context: Context, zoomerBox: ZoomerBoxItem): Intent {
+        fun newIntent(context: Context, zoomerBox: ZoomerBox): Intent {
             return Intent(context, ZoomerBoxActivity::class.java).apply {
                 putExtra(BundleKeys.ZOOMER_BOX, zoomerBox)
             }

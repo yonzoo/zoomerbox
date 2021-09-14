@@ -2,22 +2,22 @@ package com.zoomerbox.model.item
 
 import com.zoomerbox.model.dto.SeasonDropDTO
 
-class SeasonDropItem(
+class SeasonDrop(
     val seasonNumber: Int,
     val seasonName: String,
-    val bannerItem: BannerItem,
-    val collections: List<CollectionItem>
+    val banner: Banner,
+    val collections: List<Collection>
 ) {
 
     companion object {
 
-        fun buildFromDTO(seasonDropDTO: SeasonDropDTO): SeasonDropItem {
-            return SeasonDropItem(
+        fun buildFromDTO(seasonDropDTO: SeasonDropDTO): SeasonDrop {
+            return SeasonDrop(
                 seasonDropDTO.seasonNumber,
                 seasonDropDTO.seasonName,
-                BannerItem(seasonDropDTO.seasonBillboardImageUrl),
+                Banner(seasonDropDTO.seasonBillboardImageUrl),
                 seasonDropDTO.collections.map { collectionDTO ->
-                    CollectionItem.buildFromDTO(
+                    Collection.buildFromDTO(
                         collectionDTO
                     )
                 }

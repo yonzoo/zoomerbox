@@ -6,7 +6,7 @@ import com.zoomerbox.model.enumeration.RarenessEnum
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class BoxItemItem(
+class BoxItem(
     val name: String,
     val imageUrls: List<String>,
     val description: String,
@@ -15,8 +15,8 @@ class BoxItemItem(
 
     companion object {
 
-        fun buildFromDTO(boxItemDTO: BoxItemDTO): BoxItemItem {
-            return BoxItemItem(
+        fun buildFromDTO(boxItemDTO: BoxItemDTO): BoxItem {
+            return BoxItem(
                 boxItemDTO.name,
                 boxItemDTO.imageUrls,
                 boxItemDTO.description,

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ActivityBoxItemBinding
-import com.zoomerbox.model.item.BoxItemItem
+import com.zoomerbox.model.item.BoxItem
 import com.zoomerbox.model.item.SliderItem
 import com.zoomerbox.presentation.view.adapter.SliderAdapter
 import com.zoomerbox.presentation.view.util.BundleKeys
@@ -18,7 +18,7 @@ import com.zoomerbox.presentation.view.util.BundleKeys
 class BoxItemActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBoxItemBinding
-    private lateinit var boxItem: BoxItemItem
+    private lateinit var boxItem: BoxItem
     private lateinit var dots: MutableList<TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +71,7 @@ class BoxItemActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun newIntent(context: Context, boxItem: BoxItemItem, boxName: String): Intent {
+        fun newIntent(context: Context, boxItem: BoxItem, boxName: String): Intent {
             return Intent(context, BoxItemActivity::class.java).apply {
                 putExtra(BundleKeys.BOX_ITEM, boxItem)
                 putExtra(BundleKeys.PARENT_BOX, boxName)

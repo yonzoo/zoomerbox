@@ -1,60 +1,74 @@
 package com.zoomerbox.presentation.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zoomerbox.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.zoomerbox.ZoomerboxApplication
+import com.zoomerbox.databinding.FragmentShoppingCartBinding
+import com.zoomerbox.di.fragment.FragmentComponent
+import com.zoomerbox.presentation.view.adapter.CartItemsListAdapter
+import com.zoomerbox.presentation.view.adapter.diff.CartItemsListDiffUtilCallback
+import com.zoomerbox.presentation.viewmodel.ShoppingCartViewModel
+import com.zoomerbox.presentation.viewmodel.ShoppingCartViewModelFactory
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ShoppingCartFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ShoppingCartFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentShoppingCartBinding
+    private lateinit var viewModel: ShoppingCartViewModel
+    private val cartItemsListAdapter = CartItemsListAdapter(emptyList())
+
+    @Inject
+    lateinit var viewModelFactory: ShoppingCartViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_cart, container, false)
+    ): View {
+        binding = FragmentShoppingCartBinding.inflate(layoutInflater)
+        binding.cartItemsList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.cartItemsList.adapter = cartItemsListAdapter
+        binding.doggo.visibility = View.GONE
+
+        provideDependencies()
+        createViewModel()
+        setObservers()
+
+        viewModel.loadShoppingCartItems()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ShoppingCartFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ShoppingCartFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun provideDependencies() {
+        val fragmentComponent: FragmentComponent =
+            ZoomerboxApplication.getAppComponent(requireContext()).getFragmentComponent()
+        fragmentComponent.inject(this)
+    }
+
+    private fun createViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ShoppingCartViewModel::class.java)
+    }
+
+    private fun setObservers() {
+        viewModel.getCartItemsLiveData().observe(viewLifecycleOwner) { cartItems ->
+            if (cartItems.isNotEmpty()) {
+                binding.doggo.visibility = View.GONE
+                val cartItemsListDiffUtilCallback =
+                    CartItemsListDiffUtilCallback(cartItemsListAdapter.getData(), cartItems)
+                val cartItemsDiffResult = DiffUtil.calculateDiff(cartItemsListDiffUtilCallback)
+                cartItemsListAdapter.setData(cartItems)
+                if (!binding.cartItemsList.isComputingLayout) {
+                    cartItemsDiffResult.dispatchUpdatesTo(cartItemsListAdapter)
                 }
+            } else {
+                binding.doggo.visibility = View.VISIBLE
             }
+        }
     }
 }

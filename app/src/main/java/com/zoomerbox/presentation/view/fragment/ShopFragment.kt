@@ -12,10 +12,10 @@ import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.FragmentShopBinding
 import com.zoomerbox.di.fragment.FragmentComponent
 import com.zoomerbox.model.enumeration.ShopListItemTypeEnum
-import com.zoomerbox.model.item.CollectionItem
+import com.zoomerbox.model.item.Collection
 import com.zoomerbox.model.item.IShopListItem
 import com.zoomerbox.presentation.view.adapter.CollectionsListAdapter
-import com.zoomerbox.presentation.view.adapter.CollectionsListDiffUtilCallback
+import com.zoomerbox.presentation.view.adapter.diff.CollectionsListDiffUtilCallback
 import com.zoomerbox.presentation.viewmodel.ShopViewModel
 import com.zoomerbox.presentation.viewmodel.ShopViewModelFactory
 import javax.inject.Inject
@@ -54,12 +54,12 @@ class ShopFragment : Fragment() {
             val collectionsDiffUtilCallback = CollectionsListDiffUtilCallback(
                 collectionsListAdapter.getData()
                     .filter { shopListItem -> shopListItem.getType() != ShopListItemTypeEnum.BANNER }
-                    .map { shopListItem -> shopListItem as CollectionItem },
+                    .map { shopListItem -> shopListItem as Collection },
                 seasonDrop.collections
             )
             val collectionsDiffResult = DiffUtil.calculateDiff(collectionsDiffUtilCallback)
             val newData: List<IShopListItem> =
-                listOf(seasonDrop.bannerItem, *seasonDrop.collections.toTypedArray())
+                listOf(seasonDrop.banner, *seasonDrop.collections.toTypedArray())
             collectionsListAdapter.setData(newData)
             collectionsListAdapter.notifyItemChanged(0)
             if (!binding.collectionsList.isComputingLayout) {

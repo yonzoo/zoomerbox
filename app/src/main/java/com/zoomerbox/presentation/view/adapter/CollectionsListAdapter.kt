@@ -11,8 +11,8 @@ import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemBannerBinding
 import com.zoomerbox.databinding.ItemCollectionsListBinding
 import com.zoomerbox.model.enumeration.ShopListItemTypeEnum
-import com.zoomerbox.model.item.BannerItem
-import com.zoomerbox.model.item.CollectionItem
+import com.zoomerbox.model.item.Banner
+import com.zoomerbox.model.item.Collection
 import com.zoomerbox.model.item.IShopListItem
 
 class CollectionsListAdapter(
@@ -41,8 +41,8 @@ class CollectionsListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (shopItemList[position].getType()) {
-            ShopListItemTypeEnum.COLLECTION -> (holder as CollectionViewHolder).bind(shopItemList[position] as CollectionItem)
-            ShopListItemTypeEnum.BANNER -> (holder as BannerViewHolder).bind(shopItemList[position] as BannerItem)
+            ShopListItemTypeEnum.COLLECTION -> (holder as CollectionViewHolder).bind(shopItemList[position] as Collection)
+            ShopListItemTypeEnum.BANNER -> (holder as BannerViewHolder).bind(shopItemList[position] as Banner)
         }
     }
 
@@ -62,7 +62,7 @@ class CollectionsListAdapter(
         private var itemBinding: ItemCollectionsListBinding =
             ItemCollectionsListBinding.bind(itemView)
 
-        fun bind(collection: CollectionItem) {
+        fun bind(collection: Collection) {
             itemBinding.collectionTitle.text = collection.collectionName
             itemBinding.collectionCollabBoxList.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -74,9 +74,9 @@ class CollectionsListAdapter(
         private var itemBinding: ItemBannerBinding =
             ItemBannerBinding.bind(itemView)
 
-        fun bind(bannerItem: BannerItem) {
-            if (bannerItem.imageUrl.isNotEmpty()) {
-                Picasso.get().load(bannerItem.imageUrl).into(itemBinding.bannerImage)
+        fun bind(banner: Banner) {
+            if (banner.imageUrl.isNotEmpty()) {
+                Picasso.get().load(banner.imageUrl).into(itemBinding.bannerImage)
             }
         }
     }

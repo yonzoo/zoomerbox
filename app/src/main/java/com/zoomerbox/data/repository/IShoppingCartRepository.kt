@@ -1,12 +1,12 @@
 package com.zoomerbox.data.repository
 
 import com.zoomerbox.data.exception.RequestFailedException
-import com.zoomerbox.model.item.SeasonDrop
+import com.zoomerbox.model.item.ShoppingCartItem
 
-interface ISeasonDropRepository {
+interface IShoppingCartRepository {
 
     @Throws(RequestFailedException::class)
-    fun getSeasonDrop(): SeasonDrop
+    fun getShoppingCartItems(): List<ShoppingCartItem>
 
     fun getImplName(): String
 }

@@ -1,31 +1,14 @@
-package com.zoomerbox.data.repository.impl
+package com.zoomerbox.data.repository.impl.mock.utils
 
-import com.zoomerbox.data.repository.ISeasonDropRepository
 import com.zoomerbox.model.dto.BoxItemDTO
 import com.zoomerbox.model.dto.CollectionDTO
-import com.zoomerbox.model.dto.SeasonDropDTO
 import com.zoomerbox.model.dto.ZoomerBoxDTO
 import com.zoomerbox.model.enumeration.RarenessEnum
-import com.zoomerbox.model.item.SeasonDropItem
 
-class MockSeasonDropRepository : ISeasonDropRepository {
+object MockDataProvider {
 
-    override fun getSeasonDrop(): SeasonDropItem {
-        return SeasonDropItem.buildFromDTO(
-            SeasonDropDTO(
-                0,
-                "Моксезон",
-                "https://cdn.vox-cdn.com/thumbor/BcRyrvD1-ym1dzBgoer3GudBb8Q=/0x0:848x926/1200x800/filters:focal(357x533:491x667)/cdn.vox-cdn.com/uploads/chorus_image/image/69764737/E44h7SmUYAAOGxd.0.jpg",
-                getCollections()
-            )
-        )
-    }
 
-    override fun getImplName(): String {
-        return this::class.java.simpleName
-    }
-
-    private fun getCollections(): List<CollectionDTO> {
+    fun getCollections(): List<CollectionDTO> {
         val gearBoxCollection = CollectionDTO(
             "Gearbox",
             getBoxes(listOf("X_GUCCI", "X_BALENCIAGA", "X_ADIDAS", "X_NIKE"))
@@ -50,7 +33,7 @@ class MockSeasonDropRepository : ISeasonDropRepository {
         )
     }
 
-    private fun getBoxes(names: List<String>): List<ZoomerBoxDTO> {
+    fun getBoxes(names: List<String>): List<ZoomerBoxDTO> {
         val boxes = mutableListOf<ZoomerBoxDTO>()
         for (i in names.indices) {
             boxes.add(
@@ -97,16 +80,16 @@ class MockSeasonDropRepository : ISeasonDropRepository {
         return items
     }
 
-    private fun getMockPrice(): String {
-        return "420 руб"
-    }
-
     private fun getMockItemImageUrls(): List<String> {
         return listOf(
             "https://www.originalstormtrooper.ru/image/cache/data/Hasbro/carbonized/Star%20Wars%20The%20Black%20Series%20Carbonised%20Collection%20Darth%20Vader-2-500x500.jpg",
             "https://images.ru.prom.st/791758768_w640_h640_krossovki-gucci-guchchi.jpg",
             "https://spkubani.club/files/9b6/9b60996ee78ecabb4f6a44de16ebd709.png"
         )
+    }
+
+    private fun getMockPrice(): String {
+        return "420 руб"
     }
 
     private fun getMockItemDescription(): String {
@@ -116,7 +99,6 @@ class MockSeasonDropRepository : ISeasonDropRepository {
                 "Начну свое повествованье.\n" +
                 "Печален будет мой рассказ."
     }
-
 
     private fun getMockBoxImageUrls(): List<String> {
         return listOf(
