@@ -1,18 +1,17 @@
 package com.zoomerbox.presentation.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.FragmentShoppingCartBinding
 import com.zoomerbox.di.fragment.FragmentComponent
 import com.zoomerbox.presentation.view.adapter.CartItemsListAdapter
-import com.zoomerbox.presentation.view.adapter.diff.CartItemsListDiffUtilCallback
 import com.zoomerbox.presentation.viewmodel.ShoppingCartViewModel
 import com.zoomerbox.presentation.viewmodel.ShoppingCartViewModelFactory
 import javax.inject.Inject
@@ -35,6 +34,7 @@ class ShoppingCartFragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.cartItemsList.adapter = cartItemsListAdapter
         binding.doggo.visibility = View.GONE
+        binding.cartItemsProgress.visibility = View.GONE
 
         provideDependencies()
         createViewModel()
@@ -55,19 +55,22 @@ class ShoppingCartFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ShoppingCartViewModel::class.java)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setObservers() {
         viewModel.getCartItemsLiveData().observe(viewLifecycleOwner) { cartItems ->
             if (cartItems.isNotEmpty()) {
                 binding.doggo.visibility = View.GONE
-                val cartItemsListDiffUtilCallback =
-                    CartItemsListDiffUtilCallback(cartItemsListAdapter.getData(), cartItems)
-                val cartItemsDiffResult = DiffUtil.calculateDiff(cartItemsListDiffUtilCallback)
                 cartItemsListAdapter.setData(cartItems)
-                if (!binding.cartItemsList.isComputingLayout) {
-                    cartItemsDiffResult.dispatchUpdatesTo(cartItemsListAdapter)
-                }
+                cartItemsListAdapter.notifyDataSetChanged()
             } else {
                 binding.doggo.visibility = View.VISIBLE
+            }
+        }
+        viewModel.getProgressLiveData().observe(viewLifecycleOwner) { showProgress ->
+            if (showProgress) {
+                binding.cartItemsProgress.visibility = View.VISIBLE
+            } else {
+                binding.cartItemsProgress.visibility = View.GONE
             }
         }
     }

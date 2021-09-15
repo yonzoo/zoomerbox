@@ -11,30 +11,53 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zoomerboxapp">
         <activity
+            android:name=".presentation.view.activity.CreateOrderActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.view.activity.UpdatesActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presentation.view.activity.OrdersActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presentation.view.activity.FavouriteActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".presentation.view.activity.BoxItemActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.ZoomerBoxActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.SignInCodeActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.SignInActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.DefaultActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

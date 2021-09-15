@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".presentation.view.activity.CreateOrderActivity">
+
+    <TextView
+        android:id="@+id/orderDetailsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/comfortaabold"
+        android:padding="8dp"
+        android:text="@string/orderDetails"
+        android:textColor="@color/dark"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/fullNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaaregular"
+            android:text="Полное имя"
+            android:textColor="@color/purple_700"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/fullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_border_shape"
+            android:digits="0123456789"
+            android:ems="10"
+            android:fontFamily="@font/comfortaaregular"
+            android:paddingBottom="4dp"
+            android:textColorHighlight="@color/purple_700"
+            android:textColorLink="@color/purple_700"
+            android:textSize="16sp"
+            tools:text="Зумеров Моксим Зумерович" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/cityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaaregular"
+            android:text="Населенный пункт"
+            android:textColor="@color/purple_700"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/citySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_border_shape"
+            android:entries="@array/city_entries"
+            android:paddingBottom="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/postLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaaregular"
+            android:text="Почтовый индекс"
+            android:textColor="@color/purple_700"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/postIndex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_border_shape"
+            android:digits="0123456789"
+            android:ems="10"
+            android:fontFamily="@font/comfortaaregular"
+            android:inputType="number"
+            android:maxLength="6"
+            android:paddingBottom="4dp"
+            android:textColorHighlight="@color/purple_700"
+            android:textColorLink="@color/purple_700"
+            android:textSize="16sp"
+            tools:text="952278" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/itemsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaaregular"
+            android:text="Состав заказа"
+            android:textColor="@color/purple_700"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/createOrderItems"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirmOrderBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_ripple"
+        android:fontFamily="@font/comfortaabold"
+        android:text="@string/confirm_order"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/phoneNumberText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+</LinearLayout>

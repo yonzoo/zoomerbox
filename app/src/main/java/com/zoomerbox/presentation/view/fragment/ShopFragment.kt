@@ -1,21 +1,18 @@
 package com.zoomerbox.presentation.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.FragmentShopBinding
 import com.zoomerbox.di.fragment.FragmentComponent
-import com.zoomerbox.model.enumeration.ShopListItemTypeEnum
-import com.zoomerbox.model.item.Collection
 import com.zoomerbox.model.item.IShopListItem
 import com.zoomerbox.presentation.view.adapter.CollectionsListAdapter
-import com.zoomerbox.presentation.view.adapter.diff.CollectionsListDiffUtilCallback
 import com.zoomerbox.presentation.viewmodel.ShopViewModel
 import com.zoomerbox.presentation.viewmodel.ShopViewModelFactory
 import javax.inject.Inject
@@ -42,28 +39,24 @@ class ShopFragment : Fragment() {
         createViewModel()
         setObservers()
 
-        //TODO add swipe layout to fragment so the list could be nicely updated
-
         viewModel.loadSeasonDrop()
 
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setObservers() {
         viewModel.getSeasonDropLiveData().observe(viewLifecycleOwner, { seasonDrop ->
-            val collectionsDiffUtilCallback = CollectionsListDiffUtilCallback(
-                collectionsListAdapter.getData()
-                    .filter { shopListItem -> shopListItem.getType() != ShopListItemTypeEnum.BANNER }
-                    .map { shopListItem -> shopListItem as Collection },
-                seasonDrop.collections
-            )
-            val collectionsDiffResult = DiffUtil.calculateDiff(collectionsDiffUtilCallback)
             val newData: List<IShopListItem> =
                 listOf(seasonDrop.banner, *seasonDrop.collections.toTypedArray())
             collectionsListAdapter.setData(newData)
-            collectionsListAdapter.notifyItemChanged(0)
-            if (!binding.collectionsList.isComputingLayout) {
-                collectionsDiffResult.dispatchUpdatesTo(collectionsListAdapter)
+            collectionsListAdapter.notifyDataSetChanged()
+        })
+        viewModel.getProgressLiveData().observe(viewLifecycleOwner, { showProgress ->
+            if (showProgress) {
+                binding.shopItemsProgress.visibility = View.VISIBLE
+            } else {
+                binding.shopItemsProgress.visibility = View.GONE
             }
         })
     }

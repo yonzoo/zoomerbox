@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="countries_entries">
-        <item>Россия</item>
-        <item>Украина</item>
-        <item>Казахстан</item>
-        <item>Узбекистан</item>
+    <string-array name="city_entries">
+        <item>Санкт-Петербург</item>
+        <item>Москва</item>
+        <item>Якутск</item>
+        <item>Архангельск</item>
     </string-array>
 </resources>

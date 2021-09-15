@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Zoomerbox</string>
     <string name="smsSignInText">Вход по СМС</string>
+    <string name="orderDetails">Детали заказа</string>
     <string name="verifyCode">Подтвердите код из СМС</string>
     <string name="inputPhoneNumberText">Введите номер мобильного телефона. Мы отправим одноразовый код в СМС.</string>
     <string name="inputSmsCodeText">Введите 6-значный код, который пришёл на ваш телефон.</string>
@@ -27,5 +28,17 @@
     <string name="create_order">Оформить заказ</string>
     <string name="containing">Содержимое</string>
     <string name="item_is_included">Входит в бокс: %1$s</string>
+    <string name="order_by_date">Заказ от %1$s</string>
+    <string name="item_nice_amount">%1$s шт.</string>
     <string name="item_amount">%1$s</string>
+    <string name="money_amount">%1$s руб.</string>
+    <string name="favourite">Избранное</string>
+    <string name="settings">Настройки приложения</string>
+    <string name="my_orders">Мои заказы</string>
+    <string name="updates">Обновления</string>
+    <string name="user_avatar">Аватар</string>
+    <string name="nothing_in_favourite">Вы пока ничего не добавили в избранное</string>
+    <string name="nothing_in_orders">Вы пока не создали ни одного заказа</string>
+    <string name="order_sum">Сумма заказа:</string>
+    <string name="confirm_order">Подтвердить заказ</string>
 </resources>

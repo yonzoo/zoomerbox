@@ -1,60 +1,72 @@
 package com.zoomerbox.presentation.view.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zoomerbox.R
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.squareup.picasso.Picasso
+import com.zoomerbox.ZoomerboxApplication
+import com.zoomerbox.databinding.FragmentUserBinding
+import com.zoomerbox.di.fragment.FragmentComponent
+import com.zoomerbox.presentation.view.activity.FavouriteActivity
+import com.zoomerbox.presentation.view.activity.OrdersActivity
+import com.zoomerbox.presentation.viewmodel.UserViewModel
+import com.zoomerbox.presentation.viewmodel.UserViewModelFactory
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [UserFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class UserFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentUserBinding
+    private lateinit var viewModel: UserViewModel
+
+    @Inject
+    lateinit var viewModelFactory: UserViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false)
+    ): View {
+        binding = FragmentUserBinding.inflate(layoutInflater)
+
+        provideDependencies()
+        createViewModel()
+        setObservers()
+
+        binding.goToFavouriteBtn.setOnClickListener {
+            startActivity(FavouriteActivity.newIntent(requireContext()))
+        }
+        binding.gotToOrdersBtn.setOnClickListener {
+            startActivity(OrdersActivity.newIntent(requireContext()))
+        }
+
+        viewModel.loadUser()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UserFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UserFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun setObservers() {
+        viewModel.getErrorLiveData().observe(viewLifecycleOwner) {
+            Toast.makeText(context, "Failed to get response from server", Toast.LENGTH_SHORT).show()
+        }
+        viewModel.getUserLiveData().observe(viewLifecycleOwner) { user ->
+            if (user.avatarUrl.isNotEmpty()) {
+                Picasso.get().load(user.avatarUrl).into(binding.userAvatar)
             }
+            binding.userName.text = user.username
+            binding.userPhone.text = user.phone
+        }
+    }
+
+    private fun createViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
+    }
+
+    private fun provideDependencies() {
+        val fragmentComponent: FragmentComponent =
+            ZoomerboxApplication.getAppComponent(requireContext()).getFragmentComponent()
+        fragmentComponent.inject(this)
     }
 }
