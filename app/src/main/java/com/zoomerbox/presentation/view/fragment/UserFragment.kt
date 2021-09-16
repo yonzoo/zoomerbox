@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.FragmentUserBinding
 import com.zoomerbox.di.fragment.FragmentComponent
+import com.zoomerbox.presentation.view.activity.AppSettingsActivity
 import com.zoomerbox.presentation.view.activity.FavouriteActivity
 import com.zoomerbox.presentation.view.activity.OrdersActivity
 import com.zoomerbox.presentation.viewmodel.UserViewModel
@@ -40,6 +41,9 @@ class UserFragment : Fragment() {
         }
         binding.gotToOrdersBtn.setOnClickListener {
             startActivity(OrdersActivity.newIntent(requireContext()))
+        }
+        binding.goToSettingsBtn.setOnClickListener {
+            startActivity(AppSettingsActivity.newIntent(requireContext()))
         }
 
         viewModel.loadUser()

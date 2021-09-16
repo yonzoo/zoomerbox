@@ -1,13 +1,15 @@
 package com.zoomerbox.model.item
 
+import android.os.Parcelable
 import com.zoomerbox.model.dto.OrderBoxDTO
-import com.zoomerbox.model.dto.ZoomerBoxDTO
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 class OrderBox(
     val box: ZoomerBox,
     val count: Int,
     val isFavourite: Boolean
-) {
+) : Parcelable {
 
     companion object {
 

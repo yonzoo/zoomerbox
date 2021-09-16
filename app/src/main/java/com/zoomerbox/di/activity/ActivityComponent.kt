@@ -1,10 +1,7 @@
 package com.zoomerbox.di.activity
 
 import android.content.Context
-import com.zoomerbox.presentation.view.activity.FavouriteActivity
-import com.zoomerbox.presentation.view.activity.OrdersActivity
-import com.zoomerbox.presentation.view.activity.SignInActivity
-import com.zoomerbox.presentation.view.activity.SignInCodeActivity
+import com.zoomerbox.presentation.view.activity.*
 import dagger.Subcomponent
 
 
@@ -21,4 +18,8 @@ interface ActivityComponent {
     fun inject(activity: FavouriteActivity)
 
     fun inject(activity: OrdersActivity)
+
+    fun inject(activity: CreateOrderActivity)
+
+    fun inject(activity: AppSettingsActivity)
 }

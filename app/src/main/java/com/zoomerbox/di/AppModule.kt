@@ -5,6 +5,11 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.zoomerbox.ZoomerboxApplication
+import com.zoomerbox.data.store.ICartItemsStore
+import com.zoomerbox.data.store.impl.CartItemsStorePrefsImpl
+import com.zoomerbox.presentation.view.util.ISchedulersProvider
+import com.zoomerbox.presentation.view.util.SchedulersProvider
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -36,16 +41,10 @@ class AppModule(
     @Module
     interface BindsModule {
 
-//        @Binds
-//        fun bindRepository(impl: NewsRepository): INewsRepository
-//
-//        @Binds
-//        fun bindApi(impl: NewsApiImpl): INewsApi
-//
-//        @Binds
-//        fun bindStore(impl: NewsStoreImpl): NewsStore
-//
-//        @Binds
-//        fun bindScheduler(impl: SchedulersProvider): ISchedulersProvider
+        @Binds
+        fun bindStore(impl: CartItemsStorePrefsImpl): ICartItemsStore
+
+        @Binds
+        fun bindScheduler(impl: SchedulersProvider): ISchedulersProvider
     }
 }

@@ -20,6 +20,15 @@ class MockOrdersRepository : IOrdersRepository {
         )
     }
 
+    override fun createOrder(
+        cityName: String,
+        fullName: String,
+        postIndex: String,
+        orderItems: List<OrderBox>
+    ): Order {
+        return Order(orderItems, "24.08.1999", "1234-1234-1234", OrderStatusEnum.SENT, 300)
+    }
+
     override fun getImplName(): String {
         return this::class.java.simpleName
     }

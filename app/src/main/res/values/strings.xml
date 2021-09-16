@@ -41,4 +41,16 @@
     <string name="nothing_in_orders">Вы пока не создали ни одного заказа</string>
     <string name="order_sum">Сумма заказа:</string>
     <string name="confirm_order">Подтвердить заказ</string>
+    <string name="enter_full_name">Введите ФИО</string>
+    <string name="setlement">Населенный пункт</string>
+    <string name="post_index">Почтовый индекс</string>
+    <string name="order_contains">Состав заказа</string>
+    <string name="full_name">Полное имя</string>
+    <string name="post_index_placeholder">Введите почтовый индекс</string>
+    <string name="cache_header">Настройки кэша</string>
+    <string name="clear_cache_key">clear_cache</string>
+    <string name="clear_cache">Очистить кэш</string>
+    <string name="cache_off_summary">Когда кэш,отключен, мы не сможем показывать вам корзину без подключения к интернету</string>
+    <string name="cache_on_summary">Мы кэшируем товары в вашей корзине, чтобы вы могли их просматривать даже без интернета</string>
+    <string name="cache_switch">Кэшировать товары в корзине</string>
 </resources>

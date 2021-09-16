@@ -1,5 +1,6 @@
 package com.zoomerbox.di.fragment
 
+import com.zoomerbox.presentation.view.fragment.AppSettingsFragment
 import com.zoomerbox.presentation.view.fragment.ShopFragment
 import com.zoomerbox.presentation.view.fragment.ShoppingCartFragment
 import com.zoomerbox.presentation.view.fragment.UserFragment
@@ -14,4 +15,6 @@ interface FragmentComponent {
     fun inject(fragment: ShoppingCartFragment)
 
     fun inject(fragment: UserFragment)
+
+    fun inject(fragment: AppSettingsFragment)
 }

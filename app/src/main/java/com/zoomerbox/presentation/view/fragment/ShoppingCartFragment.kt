@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.FragmentShoppingCartBinding
 import com.zoomerbox.di.fragment.FragmentComponent
+import com.zoomerbox.model.item.OrderBox
+import com.zoomerbox.presentation.view.activity.CreateOrderActivity
 import com.zoomerbox.presentation.view.adapter.CartItemsListAdapter
 import com.zoomerbox.presentation.viewmodel.ShoppingCartViewModel
 import com.zoomerbox.presentation.viewmodel.ShoppingCartViewModelFactory
@@ -35,6 +37,26 @@ class ShoppingCartFragment : Fragment() {
         binding.cartItemsList.adapter = cartItemsListAdapter
         binding.doggo.visibility = View.GONE
         binding.cartItemsProgress.visibility = View.GONE
+
+        binding.createOrderBtn.setOnClickListener {
+            val selectedCartItems =
+                cartItemsListAdapter.getData().filter { cartItem -> cartItem.selected }
+            if (selectedCartItems.isNotEmpty()) {
+                startActivity(
+                    CreateOrderActivity.newIntent(
+                        requireContext(),
+                        ArrayList(selectedCartItems
+                            .map { cartItem ->
+                                OrderBox(
+                                    cartItem.box,
+                                    cartItem.count,
+                                    cartItem.isFavourite
+                                )
+                            })
+                    )
+                )
+            }
+        }
 
         provideDependencies()
         createViewModel()

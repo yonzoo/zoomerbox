@@ -11,8 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zoomerboxapp">
         <activity
+            android:name=".presentation.view.activity.AppSettingsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/PreferenceScreen"/>
+        <activity
             android:name=".presentation.view.activity.CreateOrderActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".presentation.view.activity.UpdatesActivity"
             android:exported="true"

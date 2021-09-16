@@ -12,7 +12,7 @@
         android:id="@+id/orderDetailsLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/comfortaabold"
         android:padding="8dp"
         android:text="@string/orderDetails"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/comfortaaregular"
-            android:text="Полное имя"
+            android:text="@string/full_name"
             android:textColor="@color/purple_700"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent" />
@@ -41,8 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/button_border_shape"
-            android:digits="0123456789"
             android:ems="10"
+            android:hint="@string/enter_full_name"
             android:fontFamily="@font/comfortaaregular"
             android:paddingBottom="4dp"
             android:textColorHighlight="@color/purple_700"
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/comfortaaregular"
-            android:text="Населенный пункт"
+            android:text="@string/setlement"
             android:textColor="@color/purple_700"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent" />
@@ -71,6 +71,7 @@
             android:id="@+id/citySpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/comfortaaregular"
             android:layout_marginTop="8dp"
             android:background="@drawable/button_border_shape"
             android:entries="@array/city_entries"
@@ -88,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/comfortaaregular"
-            android:text="Почтовый индекс"
+            android:text="@string/post_index"
             android:textColor="@color/purple_700"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent" />
@@ -99,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/button_border_shape"
+            android:hint="@string/post_index_placeholder"
             android:digits="0123456789"
             android:ems="10"
             android:fontFamily="@font/comfortaaregular"
@@ -122,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/comfortaaregular"
-            android:text="Состав заказа"
+            android:text="@string/order_contains"
             android:textColor="@color/purple_700"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent" />
@@ -130,7 +132,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/createOrderItems"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
             android:layout_marginTop="8dp" />
     </LinearLayout>
 
@@ -140,10 +142,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/button_ripple"
-        android:fontFamily="@font/comfortaabold"
+        android:fontFamily="@font/comfortaaregular"
         android:text="@string/confirm_order"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/phoneNumberText"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView4"
