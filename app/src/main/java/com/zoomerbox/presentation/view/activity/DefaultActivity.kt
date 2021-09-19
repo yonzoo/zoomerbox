@@ -1,27 +1,50 @@
 package com.zoomerbox.presentation.view.activity
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.ViewModelProvider
 import com.zoomerbox.R
+import com.zoomerbox.ZoomerboxApplication
+import com.zoomerbox.di.activity.ActivityComponent
+import com.zoomerbox.presentation.viewmodel.DefaultViewModel
+import com.zoomerbox.presentation.viewmodel.DefaultViewModelFactory
+import javax.inject.Inject
+
 
 class DefaultActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
+    private lateinit var viewModel: DefaultViewModel
+
+    @Inject
+    lateinit var viewModelFactory: DefaultViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_default)
-        auth = FirebaseAuth.getInstance()
+
+        provideDependencies()
+        createViewModel()
+        setObservers()
+
+        viewModel.authenticate()
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (auth.currentUser == null) {
+    private fun setObservers() {
+        viewModel.getErrorLiveData().observe(this) {
             startActivity(SignInActivity.newIntent(this))
-        } else {
+        }
+        viewModel.getUserLiveData().observe(this) {
             startActivity(MainActivity.newIntent(this))
         }
+    }
+
+    private fun createViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DefaultViewModel::class.java)
+    }
+
+    private fun provideDependencies() {
+        val activityComponent: ActivityComponent =
+            ZoomerboxApplication.getAppComponent(this).getActivityComponent()
+        activityComponent.inject(this)
     }
 }

@@ -2,7 +2,7 @@ package com.zoomerbox.data.repository.impl.mock
 
 import com.zoomerbox.data.repository.IFavouriteRepository
 import com.zoomerbox.data.repository.impl.mock.utils.MockDataProvider
-import com.zoomerbox.model.item.ZoomerBox
+import com.zoomerbox.model.app.ZoomerBox
 
 class MockFavouriteRepository : IFavouriteRepository {
     

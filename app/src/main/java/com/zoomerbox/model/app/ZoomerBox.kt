@@ -1,4 +1,4 @@
-package com.zoomerbox.model.item
+package com.zoomerbox.model.app
 
 import android.os.Parcelable
 import com.zoomerbox.model.dto.ZoomerBoxDTO
@@ -10,9 +10,7 @@ class ZoomerBox(
     val price: String,
     val imageUrls: List<String>,
     val description: String,
-    val items: List<BoxItem>,
-    val possibleRareItems: List<BoxItem>
-) : Parcelable {
+    val items: List<BoxItem>) : Parcelable {
 
     companion object {
 
@@ -22,9 +20,7 @@ class ZoomerBox(
                 zoomerBoxDTO.price,
                 zoomerBoxDTO.imageUrls,
                 zoomerBoxDTO.description,
-                zoomerBoxDTO.items.map { itemDTO -> BoxItem.buildFromDTO(itemDTO) },
-                zoomerBoxDTO.possibleRareItems.map { itemDTO -> BoxItem.buildFromDTO(itemDTO) }
-            )
+                zoomerBoxDTO.items.map { itemDTO -> BoxItem.buildFromDTO(itemDTO) })
         }
     }
 }

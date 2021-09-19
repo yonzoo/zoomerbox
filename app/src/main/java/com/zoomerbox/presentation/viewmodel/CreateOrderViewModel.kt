@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zoomerbox.data.repository.IOrdersRepository
-import com.zoomerbox.model.item.Order
-import com.zoomerbox.model.item.OrderBox
+import com.zoomerbox.model.app.Order
+import com.zoomerbox.model.app.OrderBox
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable

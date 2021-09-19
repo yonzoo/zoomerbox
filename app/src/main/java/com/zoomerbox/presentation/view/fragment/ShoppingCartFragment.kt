@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.FragmentShoppingCartBinding
 import com.zoomerbox.di.fragment.FragmentComponent
-import com.zoomerbox.model.item.OrderBox
+import com.zoomerbox.model.app.OrderBox
 import com.zoomerbox.presentation.view.activity.CreateOrderActivity
 import com.zoomerbox.presentation.view.adapter.CartItemsListAdapter
 import com.zoomerbox.presentation.viewmodel.ShoppingCartViewModel

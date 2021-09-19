@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemFavouriteBinding
-import com.zoomerbox.model.item.ZoomerBox
+import com.zoomerbox.model.app.ZoomerBox
 import com.zoomerbox.presentation.view.activity.ZoomerBoxActivity
 
 class FavouriteItemsListAdapter(

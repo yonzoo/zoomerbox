@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zoomerbox.data.repository.IFavouriteRepository
-import com.zoomerbox.model.item.ZoomerBox
+import com.zoomerbox.model.app.ZoomerBox
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable

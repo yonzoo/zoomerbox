@@ -22,4 +22,6 @@ interface ActivityComponent {
     fun inject(activity: CreateOrderActivity)
 
     fun inject(activity: AppSettingsActivity)
+
+    fun inject(activity: DefaultActivity)
 }

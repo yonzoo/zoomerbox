@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ActivityBoxItemBinding
-import com.zoomerbox.model.item.BoxItem
-import com.zoomerbox.model.item.SliderItem
+import com.zoomerbox.model.app.BoxItem
+import com.zoomerbox.model.app.SliderItem
 import com.zoomerbox.presentation.view.adapter.SliderAdapter
 import com.zoomerbox.presentation.view.util.BundleKeys
 

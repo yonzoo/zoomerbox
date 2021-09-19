@@ -3,7 +3,7 @@ package com.zoomerbox.data.repository.impl.mock
 import com.zoomerbox.data.repository.IShoppingCartRepository
 import com.zoomerbox.data.repository.impl.mock.utils.MockDataProvider
 import com.zoomerbox.model.dto.ShoppingCartItemDTO
-import com.zoomerbox.model.item.ShoppingCartItem
+import com.zoomerbox.model.app.ShoppingCartItem
 
 class MockShoppingCartRepository : IShoppingCartRepository {
 

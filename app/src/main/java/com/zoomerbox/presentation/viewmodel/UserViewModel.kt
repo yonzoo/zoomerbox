@@ -5,12 +5,10 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zoomerbox.data.repository.IShoppingCartRepository
+import com.google.firebase.auth.FirebaseAuth
 import com.zoomerbox.data.repository.IUserRepository
-import com.zoomerbox.model.item.SeasonDrop
-import com.zoomerbox.model.item.User
+import com.zoomerbox.model.app.User
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
-import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 
 class UserViewModel(
@@ -24,7 +22,8 @@ class UserViewModel(
     private var disposable: Disposable? = null
 
     fun loadUser() {
-        disposable = Single.fromCallable { repository.getUser() }
+        val user = FirebaseAuth.getInstance().currentUser
+        disposable = repository.getUser(user!!.uid, user.phoneNumber!!)
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())

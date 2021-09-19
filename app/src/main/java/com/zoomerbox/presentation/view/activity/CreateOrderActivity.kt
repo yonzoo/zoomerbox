@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.ActivityCreateOrderBinding
 import com.zoomerbox.di.activity.ActivityComponent
-import com.zoomerbox.model.item.OrderBox
+import com.zoomerbox.model.app.OrderBox
 import com.zoomerbox.presentation.view.adapter.OrderBoxesAdapter
 import com.zoomerbox.presentation.view.util.BundleKeys
 import com.zoomerbox.presentation.viewmodel.CreateOrderViewModel

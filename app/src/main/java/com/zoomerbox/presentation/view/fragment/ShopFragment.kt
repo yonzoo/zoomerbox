@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.FragmentShopBinding
 import com.zoomerbox.di.fragment.FragmentComponent
-import com.zoomerbox.model.item.IShopListItem
+import com.zoomerbox.model.app.IShopListItem
 import com.zoomerbox.presentation.view.adapter.CollectionsListAdapter
 import com.zoomerbox.presentation.viewmodel.ShopViewModel
 import com.zoomerbox.presentation.viewmodel.ShopViewModelFactory
@@ -48,7 +48,7 @@ class ShopFragment : Fragment() {
     private fun setObservers() {
         viewModel.getSeasonDropLiveData().observe(viewLifecycleOwner, { seasonDrop ->
             val newData: List<IShopListItem> =
-                listOf(seasonDrop.banner, *seasonDrop.collections.toTypedArray())
+                listOf(seasonDrop.banner, *seasonDrop.collections.sortedBy { it.collectionName }.reversed().toTypedArray())
             collectionsListAdapter.setData(newData)
             collectionsListAdapter.notifyDataSetChanged()
         })

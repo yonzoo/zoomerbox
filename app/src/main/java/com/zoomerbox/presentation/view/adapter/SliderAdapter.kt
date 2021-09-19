@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemImageSwitcherBinding
-import com.zoomerbox.model.item.SliderItem
+import com.zoomerbox.model.app.SliderItem
 
 class SliderAdapter(
     private var sliderItems: MutableList<SliderItem>

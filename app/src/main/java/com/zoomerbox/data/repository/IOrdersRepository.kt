@@ -1,8 +1,8 @@
 package com.zoomerbox.data.repository
 
 import com.zoomerbox.data.exception.RequestFailedException
-import com.zoomerbox.model.item.Order
-import com.zoomerbox.model.item.OrderBox
+import com.zoomerbox.model.app.Order
+import com.zoomerbox.model.app.OrderBox
 
 interface IOrdersRepository {
 

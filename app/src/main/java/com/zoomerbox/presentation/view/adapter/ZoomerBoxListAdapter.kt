@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemCollabBoxBinding
-import com.zoomerbox.model.item.ZoomerBox
+import com.zoomerbox.model.app.ZoomerBox
 import com.zoomerbox.presentation.view.activity.ZoomerBoxActivity
 
 class ZoomerBoxListAdapter(
@@ -38,7 +38,10 @@ class ZoomerBoxListAdapter(
 
         fun bind(zoomerBox: ZoomerBox) {
             itemBinding.boxTitle.text = zoomerBox.name
-            itemBinding.boxPrice.text = zoomerBox.price
+            itemBinding.boxPrice.text = context.resources.getString(
+                R.string.money_amount,
+                zoomerBox.price
+            )
             if (zoomerBox.imageUrls.isNotEmpty()) {
                 Picasso.get().load(zoomerBox.imageUrls[0]).into(itemBinding.boxPreview)
             }

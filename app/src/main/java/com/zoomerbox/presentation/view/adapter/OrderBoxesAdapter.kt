@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemOrderBoxBinding
-import com.zoomerbox.model.item.OrderBox
+import com.zoomerbox.model.app.OrderBox
 
 class OrderBoxesAdapter(
     private var orderBoxes: List<OrderBox>

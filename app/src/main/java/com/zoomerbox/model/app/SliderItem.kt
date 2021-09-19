@@ -1,3 +1,3 @@
-package com.zoomerbox.model.item
+package com.zoomerbox.model.app
 
 data class SliderItem(val imageUrl: String)

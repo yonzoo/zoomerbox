@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zoomerbox.data.repository.IShoppingCartRepository
-import com.zoomerbox.model.item.ShoppingCartItem
+import com.zoomerbox.model.app.ShoppingCartItem
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable

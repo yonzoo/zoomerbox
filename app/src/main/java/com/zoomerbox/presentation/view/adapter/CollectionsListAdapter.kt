@@ -11,9 +11,9 @@ import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemBannerBinding
 import com.zoomerbox.databinding.ItemCollectionsListBinding
 import com.zoomerbox.model.enumeration.ShopListItemTypeEnum
-import com.zoomerbox.model.item.Banner
-import com.zoomerbox.model.item.Collection
-import com.zoomerbox.model.item.IShopListItem
+import com.zoomerbox.model.app.Banner
+import com.zoomerbox.model.app.Collection
+import com.zoomerbox.model.app.IShopListItem
 
 class CollectionsListAdapter(
     private var shopItemList: List<IShopListItem>
@@ -66,7 +66,8 @@ class CollectionsListAdapter(
             itemBinding.collectionTitle.text = collection.collectionName
             itemBinding.collectionCollabBoxList.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            itemBinding.collectionCollabBoxList.adapter = ZoomerBoxListAdapter(collection.boxes)
+            itemBinding.collectionCollabBoxList.adapter =
+                ZoomerBoxListAdapter(collection.boxes.sortedBy { it.name })
         }
     }
 

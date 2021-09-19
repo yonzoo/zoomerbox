@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemOrdersBinding
 import com.zoomerbox.domain.util.StatusResolver
-import com.zoomerbox.model.item.Order
+import com.zoomerbox.model.app.Order
 
 class OrdersAdapter(
     private var orderList: List<Order>

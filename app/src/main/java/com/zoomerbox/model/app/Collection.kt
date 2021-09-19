@@ -1,4 +1,4 @@
-package com.zoomerbox.model.item
+package com.zoomerbox.model.app
 
 import com.zoomerbox.model.dto.CollectionDTO
 import com.zoomerbox.model.enumeration.ShopListItemTypeEnum

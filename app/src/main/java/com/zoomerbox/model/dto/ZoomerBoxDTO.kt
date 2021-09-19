@@ -7,6 +7,4 @@ data class ZoomerBoxDTO(
     val price: String,
     val imageUrls: List<String>,
     val description: @RawValue String,
-    val items: @RawValue List<BoxItemDTO>,
-    val possibleRareItems: @RawValue List<BoxItemDTO>
-)
+    val items: @RawValue List<BoxItemDTO>)

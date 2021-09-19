@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.zoomerbox.data.store.ICartItemsStore
-import com.zoomerbox.model.item.ShoppingCartItem
+import com.zoomerbox.model.app.ShoppingCartItem
 import com.zoomerbox.presentation.view.util.BundleKeys
 import javax.inject.Inject
 

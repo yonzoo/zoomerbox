@@ -3,7 +3,6 @@ package com.zoomerbox.data.repository.impl.mock.utils
 import com.zoomerbox.model.dto.BoxItemDTO
 import com.zoomerbox.model.dto.CollectionDTO
 import com.zoomerbox.model.dto.ZoomerBoxDTO
-import com.zoomerbox.model.enumeration.RarenessEnum
 
 object MockDataProvider {
 
@@ -42,9 +41,7 @@ object MockDataProvider {
                     imageUrls = getMockBoxImageUrls(),
                     price = getMockPrice(),
                     description = getMockBoxDescription(),
-                    items = getItems(),
-                    possibleRareItems = getRareItems()
-                )
+                    items = getItems())
             )
         }
         return boxes
@@ -57,9 +54,7 @@ object MockDataProvider {
                 BoxItemDTO(
                     name = "Предмет $i",
                     imageUrls = getMockItemImageUrls(),
-                    description = getMockItemDescription(),
-                    rareness = RarenessEnum.CASUAL
-                )
+                    description = getMockItemDescription())
             )
         }
         return items
@@ -72,9 +67,7 @@ object MockDataProvider {
                 BoxItemDTO(
                     name = "Редкий предмет $i",
                     imageUrls = getMockItemImageUrls(),
-                    description = getMockItemDescription(),
-                    rareness = if (i > 3) RarenessEnum.RARE else RarenessEnum.LEGENDARY
-                )
+                    description = getMockItemDescription())
             )
         }
         return items

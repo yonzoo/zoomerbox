@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemShoppingCartBinding
-import com.zoomerbox.model.item.ShoppingCartItem
+import com.zoomerbox.model.app.ShoppingCartItem
 
 class CartItemsListAdapter(
     private var cartItems: List<ShoppingCartItem>

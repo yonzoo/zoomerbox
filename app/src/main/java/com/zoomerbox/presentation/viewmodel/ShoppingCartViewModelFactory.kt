@@ -2,7 +2,6 @@ package com.zoomerbox.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.zoomerbox.data.repository.impl.mock.MockSeasonDropRepository
 import com.zoomerbox.data.repository.impl.mock.MockShoppingCartRepository
 import com.zoomerbox.presentation.view.util.SchedulersProvider
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.zoomerbox.model.item
+package com.zoomerbox.model.app
 
 import android.os.Parcelable
 import com.zoomerbox.model.dto.OrderBoxDTO

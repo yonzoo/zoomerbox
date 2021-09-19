@@ -1,6 +1,6 @@
 package com.zoomerbox.data.store
 
-import com.zoomerbox.model.item.ShoppingCartItem
+import com.zoomerbox.model.app.ShoppingCartItem
 
 interface ICartItemsStore {
 

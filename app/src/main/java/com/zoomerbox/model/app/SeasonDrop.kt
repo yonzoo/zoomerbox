@@ -1,10 +1,9 @@
-package com.zoomerbox.model.item
+package com.zoomerbox.model.app
 
 import com.zoomerbox.model.dto.SeasonDropDTO
 
 class SeasonDrop(
     val seasonNumber: Int,
-    val seasonName: String,
     val banner: Banner,
     val collections: List<Collection>
 ) {
@@ -14,7 +13,6 @@ class SeasonDrop(
         fun buildFromDTO(seasonDropDTO: SeasonDropDTO): SeasonDrop {
             return SeasonDrop(
                 seasonDropDTO.seasonNumber,
-                seasonDropDTO.seasonName,
                 Banner(seasonDropDTO.seasonBillboardImageUrl),
                 seasonDropDTO.collections.map { collectionDTO ->
                     Collection.buildFromDTO(

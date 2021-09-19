@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemBoxItemBinding
-import com.zoomerbox.model.item.BoxItem
+import com.zoomerbox.model.app.BoxItem
 import com.zoomerbox.presentation.view.activity.BoxItemActivity
 
 class BoxItemListAdapter(

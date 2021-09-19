@@ -5,10 +5,9 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import com.zoomerbox.data.repository.ISeasonDropRepository
-import com.zoomerbox.model.item.SeasonDrop
-import io.reactivex.Single
+import com.zoomerbox.model.app.SeasonDrop
+import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.disposables.Disposable
 
 class ShopViewModel(
@@ -22,7 +21,7 @@ class ShopViewModel(
     private var disposable: Disposable? = null
 
     fun loadSeasonDrop() {
-        disposable = Single.fromCallable { repository.getSeasonDrop() }
+        disposable = repository.getSeasonDrop()
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())
