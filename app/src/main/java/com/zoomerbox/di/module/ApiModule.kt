@@ -4,9 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import com.zoomerbox.data.interceptor.RequestInterceptor
-import com.zoomerbox.data.service.SeasonDropApiService
-import com.zoomerbox.data.service.UserApiService
+import com.zoomerbox.data.service.*
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -46,7 +44,7 @@ class ApiModule {
 
         val httpClient = OkHttpClient.Builder()
         httpClient.cache(cache)
-        httpClient.addInterceptor(RequestInterceptor())
+//        httpClient.addInterceptor(RequestInterceptor())
         httpClient.addInterceptor(logging)
         httpClient.connectTimeout(15, TimeUnit.SECONDS)
         httpClient.readTimeout(15, TimeUnit.SECONDS)
@@ -74,5 +72,23 @@ class ApiModule {
     @Singleton
     internal fun provideUserApiService(retrofit: Retrofit): UserApiService {
         return retrofit.create(UserApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideShoppingCartApiService(retrofit: Retrofit): ShoppingCartApiService {
+        return retrofit.create(ShoppingCartApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideFavouriteApiService(retrofit: Retrofit): FavouriteApiService {
+        return retrofit.create(FavouriteApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideOrdersApiService(retrofit: Retrofit): OrdersApiService {
+        return retrofit.create(OrdersApiService::class.java)
     }
 }

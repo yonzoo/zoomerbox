@@ -21,7 +21,7 @@ class FavouriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavouriteBinding
     private lateinit var viewModel: FavouriteViewModel
-    private val favouriteItemsListAdapter = FavouriteItemsListAdapter(emptyList())
+    private lateinit var favouriteItemsListAdapter: FavouriteItemsListAdapter
 
     @Inject
     lateinit var viewModelFactory: FavouriteViewModelFactory
@@ -32,6 +32,9 @@ class FavouriteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.favouriteItemsList.layoutManager = GridLayoutManager(this, 2)
+        favouriteItemsListAdapter = FavouriteItemsListAdapter(emptyList()) {
+            viewModel.removeItemFromFavourite(it)
+        }
         binding.favouriteItemsList.adapter = favouriteItemsListAdapter
 
         provideDependencies()

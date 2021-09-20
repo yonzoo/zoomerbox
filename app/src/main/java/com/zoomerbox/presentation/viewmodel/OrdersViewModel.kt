@@ -5,10 +5,10 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.zoomerbox.data.repository.IOrdersRepository
 import com.zoomerbox.model.app.Order
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
-import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 
 class OrdersViewModel(
@@ -22,7 +22,8 @@ class OrdersViewModel(
     private var disposable: Disposable? = null
 
     fun loadOrders() {
-        disposable = Single.fromCallable { repository.getOrders() }
+        val authUser = FirebaseAuth.getInstance().currentUser
+        disposable = repository.getOrders(authUser!!.uid)
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())

@@ -22,8 +22,8 @@ class UserViewModel(
     private var disposable: Disposable? = null
 
     fun loadUser() {
-        val user = FirebaseAuth.getInstance().currentUser
-        disposable = repository.getUser(user!!.uid, user.phoneNumber!!)
+        val authUser = FirebaseAuth.getInstance().currentUser
+        disposable = repository.getUserFromPreferences(authUser!!.uid, authUser.phoneNumber!!)
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())

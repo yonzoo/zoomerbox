@@ -55,6 +55,12 @@ class OrdersActivity : AppCompatActivity() {
             binding.noOrders.visibility = View.VISIBLE
         }
         viewModel.getOrdersLiveData().observe(this) { orders ->
+            val ordersCopy = orders.toMutableList()
+            ordersCopy.forEach { order ->
+                order.totalOrderSum =
+                    order.boxes.map { orderBox -> orderBox.count * orderBox.box.price.toInt() }
+                        .sum()
+            }
             ordersAdapter.setData(orders)
             ordersAdapter.notifyDataSetChanged()
             if (orders.isEmpty()) {

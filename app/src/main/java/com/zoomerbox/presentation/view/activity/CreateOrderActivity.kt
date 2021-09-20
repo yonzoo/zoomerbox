@@ -41,6 +41,15 @@ class CreateOrderActivity : AppCompatActivity() {
         orderAdapter.setData(orderItems)
         orderAdapter.notifyDataSetChanged()
 
+        binding.confirmOrderBtn.setOnClickListener {
+            viewModel.createOrder(
+                binding.citySpinner.selectedItem.toString(),
+                binding.fullName.text.toString(),
+                binding.postIndex.text.toString(),
+                orderItems
+            )
+        }
+
         provideDependencies()
         createViewModel()
         setObservers()
@@ -49,12 +58,14 @@ class CreateOrderActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun setObservers() {
         viewModel.getErrorLiveData().observe(this) {
-            Toast.makeText(this, "Не получилось получить ответ от сервера", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "Произошла ошибочка!", Toast.LENGTH_SHORT)
                 .show()
             orderAdapter.setData(listOf())
             orderAdapter.notifyDataSetChanged()
         }
         viewModel.getOrderLiveData().observe(this) {
+            Toast.makeText(this, "Заказ успешно создан!", Toast.LENGTH_SHORT)
+                .show()
             finish()
         }
     }

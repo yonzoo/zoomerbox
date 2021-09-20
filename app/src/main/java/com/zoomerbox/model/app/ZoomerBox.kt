@@ -10,7 +10,18 @@ class ZoomerBox(
     val price: String,
     val imageUrls: List<String>,
     val description: String,
-    val items: List<BoxItem>) : Parcelable {
+    val items: List<BoxItem>
+) : Parcelable {
+
+    fun toDTO(): ZoomerBoxDTO {
+        return ZoomerBoxDTO(
+            name,
+            price,
+            imageUrls,
+            description,
+            items.map { item -> item.toDTO() }
+        )
+    }
 
     companion object {
 

@@ -31,6 +31,7 @@
     <string name="order_by_date">Заказ от %1$s</string>
     <string name="item_nice_amount">%1$s шт.</string>
     <string name="item_amount">%1$s</string>
+    <string name="item_count">%1$s %2$s</string>
     <string name="money_amount">%1$s руб.</string>
     <string name="favourite">Избранное</string>
     <string name="settings">Настройки приложения</string>
@@ -53,4 +54,13 @@
     <string name="cache_off_summary">Когда кэш,отключен, мы не сможем показывать вам корзину без подключения к интернету</string>
     <string name="cache_on_summary">Мы кэшируем товары в вашей корзине, чтобы вы могли их просматривать даже без интернета</string>
     <string name="cache_switch">Кэшировать товары в корзине</string>
+
+    <plurals name="plurals">
+        <item quantity="zero">нет боксов</item>
+        <item quantity="one">%1$d бокс</item>
+        <item quantity="two">%1$d бокса</item>
+        <item quantity="few">%1$d бокса</item>
+        <item quantity="many">%1$d боксов</item>
+        <item quantity="other">%1$d боксов</item>
+    </plurals>
 </resources>

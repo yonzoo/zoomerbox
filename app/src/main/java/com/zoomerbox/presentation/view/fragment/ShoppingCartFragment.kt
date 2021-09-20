@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.zoomerbox.R
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.FragmentShoppingCartBinding
 import com.zoomerbox.di.fragment.FragmentComponent
@@ -22,7 +23,7 @@ class ShoppingCartFragment : Fragment() {
 
     private lateinit var binding: FragmentShoppingCartBinding
     private lateinit var viewModel: ShoppingCartViewModel
-    private val cartItemsListAdapter = CartItemsListAdapter(emptyList())
+    private lateinit var cartItemsListAdapter: CartItemsListAdapter
 
     @Inject
     lateinit var viewModelFactory: ShoppingCartViewModelFactory
@@ -32,9 +33,6 @@ class ShoppingCartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentShoppingCartBinding.inflate(layoutInflater)
-        binding.cartItemsList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.cartItemsList.adapter = cartItemsListAdapter
         binding.doggo.visibility = View.GONE
         binding.cartItemsProgress.visibility = View.GONE
 
@@ -49,8 +47,7 @@ class ShoppingCartFragment : Fragment() {
                             .map { cartItem ->
                                 OrderBox(
                                     cartItem.box,
-                                    cartItem.count,
-                                    cartItem.isFavourite
+                                    cartItem.count
                                 )
                             })
                     )
@@ -61,6 +58,38 @@ class ShoppingCartFragment : Fragment() {
         provideDependencies()
         createViewModel()
         setObservers()
+
+        cartItemsListAdapter = CartItemsListAdapter(emptyList(),
+            onItemFavouriteToggled = {
+                viewModel.toggleBoxFavourite(it)
+            }, onItemDeleted = {
+                viewModel.deleteShoppingCartItem(it)
+            }, onItemAdded = {
+                viewModel.addShoppingCartItem(it)
+            }, onItemSelectToggled = {
+                viewModel.toggleSelectShoppingCartItem(it)
+            }, onSingleItemRemoved = {
+                viewModel.removeSingleShoppingCartItem(it)
+            })
+        binding.cartItemsList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.cartItemsList.adapter = cartItemsListAdapter
+
+        binding.removeSelected.setOnClickListener {
+            viewModel.deleteAllShoppingCartItems(
+                cartItemsListAdapter.getData().filter { item -> item.selected })
+        }
+
+        binding.selectAllArea.setOnClickListener {
+            val items = cartItemsListAdapter.getData()
+            if (items.filter { item -> !item.selected }.toList().isNotEmpty()) {
+                viewModel.selectAllShoppingCartItems(items)
+                binding.selectAllBtn.setImageResource(R.drawable.v1chosenicon)
+            } else {
+                viewModel.deselectAllShoppingCartItems(items)
+                binding.selectAllBtn.setImageResource(R.drawable.v1notchosenicon)
+            }
+        }
 
         viewModel.loadShoppingCartItems()
 
@@ -82,10 +111,45 @@ class ShoppingCartFragment : Fragment() {
         viewModel.getCartItemsLiveData().observe(viewLifecycleOwner) { cartItems ->
             if (cartItems.isNotEmpty()) {
                 binding.doggo.visibility = View.GONE
-                cartItemsListAdapter.setData(cartItems)
+                if (cartItems.filter { item -> item.selected }
+                        .toList().size == cartItems.size) {
+                    binding.selectAllBtn.setImageResource(R.drawable.v1chosenicon)
+                } else {
+                    binding.selectAllBtn.setImageResource(R.drawable.v1notchosenicon)
+                }
+                val selectedItemsSum =
+                    cartItems.filter { item -> item.selected }.map { item -> item.count }.sum()
+                val selectedMoneySum =
+                    cartItems.filter { item -> item.selected }
+                        .map { item -> item.box.price.toInt() * item.count }
+                        .sum()
+                binding.totalSum.text = context?.resources?.getString(
+                    R.string.money_amount,
+                    selectedMoneySum.toString()
+                )
+                binding.totalItemAmount.text = context?.resources?.getQuantityString(
+                    R.plurals.plurals,
+                    selectedItemsSum,
+                    selectedItemsSum
+                )
+                cartItemsListAdapter.setData(cartItems.sortedBy { it.box.name })
                 cartItemsListAdapter.notifyDataSetChanged()
             } else {
+                binding.selectAllBtn.setImageResource(R.drawable.v1notchosenicon)
+                binding.totalItemAmount.text = context?.resources?.getQuantityString(
+                    R.plurals.plurals,
+                    0,
+                    0
+                )
                 binding.doggo.visibility = View.VISIBLE
+                binding.selectAllBtn.setImageResource(R.drawable.v1notchosenicon)
+                binding.totalSum.text = context?.resources?.getString(
+                    R.string.money_amount,
+                    "0"
+                )
+
+                cartItemsListAdapter.setData(emptyList())
+                cartItemsListAdapter.notifyDataSetChanged()
             }
         }
         viewModel.getProgressLiveData().observe(viewLifecycleOwner) { showProgress ->
@@ -94,6 +158,50 @@ class ShoppingCartFragment : Fragment() {
             } else {
                 binding.cartItemsProgress.visibility = View.GONE
             }
+        }
+        viewModel.getIsBoxFavouriteLiveData().observe(viewLifecycleOwner) { isFavourite ->
+            val itemIndex = cartItemsListAdapter.getData().indexOf(
+                cartItemsListAdapter.getData()
+                    .find { item -> item.box.name == viewModel.updatedFavouriteItem?.box?.name }
+            )
+            val newData = cartItemsListAdapter.getData()
+            if (newData.isEmpty()) {
+                cartItemsListAdapter.setData(emptyList())
+                cartItemsListAdapter.notifyDataSetChanged()
+            } else {
+                newData[itemIndex].isFavourite = isFavourite
+                cartItemsListAdapter.setData(newData)
+                cartItemsListAdapter.notifyItemChanged(itemIndex)
+            }
+        }
+        viewModel.getCartItemsSelectedLiveData().observe(viewLifecycleOwner) { cartItems ->
+            val items = cartItemsListAdapter.getData()
+            if (items.filter { item -> !item.selected }.toList().isEmpty()) {
+                binding.selectAllBtn.setImageResource(R.drawable.v1notchosenicon)
+            }
+            if (cartItems.filter { item -> item.selected }.toList().size == cartItems.size) {
+                binding.selectAllBtn.setImageResource(R.drawable.v1chosenicon)
+            }
+            val selectedItemsSum =
+                cartItems.filter { item -> item.selected }.map { item -> item.count }
+                    .sum()
+            val selectedMoneySum =
+                cartItems.filter { item -> item.selected }
+                    .map { item -> item.box.price.toInt() * item.count }
+                    .sum()
+            binding.totalSum.text =
+                context?.resources?.getString(R.string.money_amount, selectedMoneySum.toString())
+            binding.totalItemAmount.text = context?.resources?.getQuantityString(
+                R.plurals.plurals,
+                selectedItemsSum,
+                selectedItemsSum
+            )
+            val itemIndex = items.indexOf(
+                cartItemsListAdapter.getData()
+                    .find { item -> item.box.name == viewModel.updatedSelectedItem?.box?.name }
+            )
+            cartItemsListAdapter.setData(cartItems.sortedBy { it.box.name })
+            cartItemsListAdapter.notifyItemChanged(itemIndex)
         }
     }
 }

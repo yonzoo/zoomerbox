@@ -12,7 +12,8 @@ import com.zoomerbox.model.app.ZoomerBox
 import com.zoomerbox.presentation.view.activity.ZoomerBoxActivity
 
 class FavouriteItemsListAdapter(
-    private var favouriteItems: List<ZoomerBox>
+    private var favouriteItems: List<ZoomerBox>,
+    private val onItemRemovedFromFavourite: (ZoomerBox) -> Unit,
 ) : RecyclerView.Adapter<FavouriteItemsListAdapter.FavouriteItemViewHolder>() {
 
     lateinit var context: Context
@@ -47,7 +48,8 @@ class FavouriteItemsListAdapter(
 
         fun bind(favouriteItem: ZoomerBox) {
             itemBinding.boxTitle.text = favouriteItem.name
-            itemBinding.boxPrice.text = favouriteItem.price
+            itemBinding.boxPrice.text =
+                context.getString(R.string.money_amount, favouriteItem.price)
             if (favouriteItem.imageUrls.isNotEmpty()) {
                 Picasso.get().load(favouriteItem.imageUrls[0]).into(itemBinding.boxPreview)
             }
@@ -55,6 +57,7 @@ class FavouriteItemsListAdapter(
                 context.startActivity(ZoomerBoxActivity.newIntent(context, favouriteItem))
             }
             itemBinding.crossBtn.setOnClickListener {
+                onItemRemovedFromFavourite(favouriteItem)
             }
         }
     }

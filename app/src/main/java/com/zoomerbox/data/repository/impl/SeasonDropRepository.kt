@@ -1,4 +1,4 @@
-package com.zoomerbox.data.repository.impl.real
+package com.zoomerbox.data.repository.impl
 
 import com.zoomerbox.data.repository.ISeasonDropRepository
 import com.zoomerbox.data.service.SeasonDropApiService

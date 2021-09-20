@@ -5,11 +5,11 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.zoomerbox.data.repository.IOrdersRepository
 import com.zoomerbox.model.app.Order
 import com.zoomerbox.model.app.OrderBox
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
-import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 
 class CreateOrderViewModel(
@@ -28,14 +28,14 @@ class CreateOrderViewModel(
         postIndex: String,
         orderItems: List<OrderBox>
     ) {
-        disposable = Single.fromCallable {
-            repository.createOrder(
-                cityName,
-                fullName,
-                postIndex,
-                orderItems
-            )
-        }
+        val authUser = FirebaseAuth.getInstance().currentUser
+        disposable = repository.createOrder(
+            authUser!!.uid,
+            cityName,
+            fullName,
+            postIndex,
+            orderItems
+        )
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())

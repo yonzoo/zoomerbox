@@ -7,13 +7,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.zoomerbox.data.repository.IUserRepository
+import com.zoomerbox.domain.IUserInteractor
 import com.zoomerbox.model.app.User
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.disposables.Disposable
 
 class DefaultViewModel(
-    @NonNull private val repository: IUserRepository,
+    @NonNull private val interactor: IUserInteractor,
     @NonNull private val schedulersProvider: ISchedulersProvider
 ) : ViewModel() {
 
@@ -36,7 +36,7 @@ class DefaultViewModel(
 
     private fun getUserCredentials(uid: String, phoneNumber: String) {
         disposable =
-            repository.getUser(uid, phoneNumber)
+            interactor.getUserCredentials(uid, phoneNumber)
                 .doOnSubscribe { progressLiveData.postValue(true) }
                 .doOnTerminate { progressLiveData.postValue(false) }
                 .subscribeOn(schedulersProvider.io())
@@ -44,13 +44,13 @@ class DefaultViewModel(
                 .subscribe({ result ->
                     Log.d(
                         TAG,
-                        "${repository.getImplName()} successfully returned the user: $result"
+                        "Successfully got user data: $result"
                     )
                     userLiveData.postValue(result)
                 }, { ex ->
                     Log.e(
                         TAG,
-                        "${repository.getImplName()} failed to get the result with the exception: ${ex.message}"
+                        "Failed to get user data with exception: $ex"
                     )
                     errorLiveData.postValue(ex)
                 })

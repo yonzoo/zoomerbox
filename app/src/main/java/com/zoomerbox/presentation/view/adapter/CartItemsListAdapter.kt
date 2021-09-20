@@ -11,7 +11,12 @@ import com.zoomerbox.databinding.ItemShoppingCartBinding
 import com.zoomerbox.model.app.ShoppingCartItem
 
 class CartItemsListAdapter(
-    private var cartItems: List<ShoppingCartItem>
+    private var cartItems: List<ShoppingCartItem>,
+    private val onItemFavouriteToggled: (ShoppingCartItem) -> Unit,
+    private val onItemDeleted: (ShoppingCartItem) -> Unit,
+    private val onItemSelectToggled: (ShoppingCartItem) -> Unit,
+    private val onItemAdded: (ShoppingCartItem) -> Unit,
+    private val onSingleItemRemoved: (ShoppingCartItem) -> Unit
 ) : RecyclerView.Adapter<CartItemsListAdapter.CartItemViewHolder>() {
 
     lateinit var context: Context
@@ -46,7 +51,8 @@ class CartItemsListAdapter(
 
         fun bind(cartItem: ShoppingCartItem) {
             itemBinding.boxTitle.text = cartItem.box.name
-            itemBinding.zoomerBoxPrice.text = cartItem.box.price
+            itemBinding.zoomerBoxPrice.text =
+                context.resources.getString(R.string.money_amount, cartItem.box.price.toString())
             itemBinding.itemAmount.text =
                 context.resources.getString(R.string.item_amount, cartItem.count.toString())
             if (cartItem.selected) {
@@ -62,10 +68,21 @@ class CartItemsListAdapter(
             if (cartItem.box.imageUrls.isNotEmpty()) {
                 Picasso.get().load(cartItem.box.imageUrls[0]).into(itemBinding.boxItemPreview)
             }
-            itemBinding.selectBtn.setOnClickListener { TODO("Implement") }
-            itemBinding.selectBtn.setOnClickListener { TODO("Implement") }
-            itemBinding.likeArea.setOnClickListener { TODO("Implement") }
-            itemBinding.trashArea.setOnClickListener { TODO("Implement") }
+            itemBinding.plusBtn.setOnClickListener {
+                onItemAdded(cartItem)
+            }
+            itemBinding.minusBtn.setOnClickListener {
+                onSingleItemRemoved(cartItem)
+            }
+            itemBinding.selectBtn.setOnClickListener {
+                onItemSelectToggled(cartItem)
+            }
+            itemBinding.likeArea.setOnClickListener {
+                onItemFavouriteToggled(cartItem)
+            }
+            itemBinding.trashArea.setOnClickListener {
+                onItemDeleted(cartItem);
+            }
         }
     }
 }

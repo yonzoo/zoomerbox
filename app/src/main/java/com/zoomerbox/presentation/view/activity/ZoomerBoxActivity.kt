@@ -5,23 +5,35 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.zoomerbox.R
+import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.databinding.ActivityZoomerBoxBinding
+import com.zoomerbox.di.activity.ActivityComponent
 import com.zoomerbox.model.app.SliderItem
 import com.zoomerbox.model.app.ZoomerBox
 import com.zoomerbox.presentation.view.adapter.BoxItemListAdapter
 import com.zoomerbox.presentation.view.adapter.SliderAdapter
 import com.zoomerbox.presentation.view.util.BundleKeys
+import com.zoomerbox.presentation.viewmodel.ZoomerBoxViewModel
+import com.zoomerbox.presentation.viewmodel.ZoomerBoxViewModelFactory
+import javax.inject.Inject
 
 class ZoomerBoxActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityZoomerBoxBinding
     private lateinit var zoomerBox: ZoomerBox
     private lateinit var dots: MutableList<TextView>
+    private lateinit var viewModel: ZoomerBoxViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ZoomerBoxViewModelFactory
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +41,17 @@ class ZoomerBoxActivity : AppCompatActivity() {
         setContentView(binding.root)
         dots = mutableListOf()
         zoomerBox = intent.getParcelableExtra(BundleKeys.ZOOMER_BOX)!!
+
+        provideDependencies()
+        createViewModel()
+        setObservers()
         setIndicators()
+
         binding.boxItems.adapter = BoxItemListAdapter(zoomerBox.items, zoomerBox.name)
         binding.boxItems.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.zoomerBoxTitle.text = zoomerBox.name
-        binding.priceText.text = zoomerBox.price
+        binding.priceText.text = resources.getString(R.string.money_amount, zoomerBox.price)
         binding.boxDescription.text = zoomerBox.description
         binding.imageSwitcher.adapter =
             SliderAdapter(zoomerBox.imageUrls.map { imageUrl -> SliderItem(imageUrl) }
@@ -51,6 +68,41 @@ class ZoomerBoxActivity : AppCompatActivity() {
                 super.onPageSelected(position)
             }
         })
+
+        binding.fab.setOnClickListener {
+            viewModel.toggleBoxFavourite(zoomerBox.name)
+        }
+        binding.addToCartBtn.setOnClickListener {
+            viewModel.addToCart(zoomerBox)
+        }
+
+        viewModel.isBoxFavourite(zoomerBox.name)
+    }
+
+    private fun setObservers() {
+        viewModel.getErrorLiveData().observe(this) {
+            Toast.makeText(this, "Не получилось загрузить бокс", Toast.LENGTH_SHORT).show()
+        }
+        viewModel.getResultLiveData().observe(this) {
+            Toast.makeText(this, "Бокс добавлен в корзину!", Toast.LENGTH_SHORT).show()
+        }
+        viewModel.getFavouriteLiveData().observe(this) { isFavourite ->
+            if (isFavourite) {
+                binding.fab.setImageResource(R.drawable.hearticon)
+            } else {
+                binding.fab.setImageResource(R.drawable.nonhearticon)
+            }
+        }
+    }
+
+    private fun createViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ZoomerBoxViewModel::class.java)
+    }
+
+    private fun provideDependencies() {
+        val activityComponent: ActivityComponent =
+            ZoomerboxApplication.getAppComponent(this).getActivityComponent()
+        activityComponent.inject(this)
     }
 
     private fun setActiveDot(position: Int) {

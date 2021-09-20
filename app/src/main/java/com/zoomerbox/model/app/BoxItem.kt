@@ -11,6 +11,14 @@ class BoxItem(
     val description: String
 ) : Parcelable {
 
+    fun toDTO(): BoxItemDTO {
+        return BoxItemDTO(
+            name,
+            imageUrls,
+            description
+        )
+    }
+
     companion object {
 
         fun buildFromDTO(boxItemDTO: BoxItemDTO): BoxItem {

@@ -5,12 +5,12 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.zoomerbox.ZoomerboxApplication
-import com.zoomerbox.data.repository.ISeasonDropRepository
-import com.zoomerbox.data.repository.IUserRepository
-import com.zoomerbox.data.repository.impl.real.SeasonDropRepository
-import com.zoomerbox.data.repository.impl.real.UserRepository
+import com.zoomerbox.data.repository.*
+import com.zoomerbox.data.repository.impl.*
 import com.zoomerbox.data.store.ICartItemsStore
 import com.zoomerbox.data.store.impl.CartItemsStorePrefsImpl
+import com.zoomerbox.domain.IUserInteractor
+import com.zoomerbox.domain.impl.UserInteractor
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import com.zoomerbox.presentation.view.util.SchedulersProvider
 import dagger.Binds
@@ -55,6 +55,18 @@ class AppModule(
         fun bindUserRepository(impl: UserRepository): IUserRepository
 
         @Binds
+        fun bindShoppingCartRepository(impl: ShoppingCartRepository): IShoppingCartRepository
+
+        @Binds
+        fun bindFavouriteRepository(impl: FavouriteRepository): IFavouriteRepository
+
+        @Binds
+        fun bindOrdersRepository(impl: OrdersRepository): IOrdersRepository
+
+        @Binds
         fun bindScheduler(impl: SchedulersProvider): ISchedulersProvider
+
+        @Binds
+        fun bindUserInteractor(impl: UserInteractor): IUserInteractor
     }
 }

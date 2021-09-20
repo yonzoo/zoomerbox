@@ -8,7 +8,7 @@ class Order(
     val date: String,
     val orderNumber: String,
     val orderStatus: OrderStatusEnum,
-    val totalOrderSum: Int
+    var totalOrderSum: Int
 ) {
 
     companion object {

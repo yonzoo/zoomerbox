@@ -5,10 +5,10 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.zoomerbox.data.repository.IFavouriteRepository
 import com.zoomerbox.model.app.ZoomerBox
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
-import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 
 class FavouriteViewModel(
@@ -22,7 +22,30 @@ class FavouriteViewModel(
     private var disposable: Disposable? = null
 
     fun loadFavouriteItems() {
-        disposable = Single.fromCallable { repository.getFavouriteItems() }
+        val authUser = FirebaseAuth.getInstance().currentUser
+        disposable = repository.getFavouriteItems(authUser!!.uid)
+            .doOnSubscribe { progressLiveData.postValue(true) }
+            .doOnTerminate { progressLiveData.postValue(false) }
+            .subscribeOn(schedulersProvider.io())
+            .observeOn(schedulersProvider.ui())
+            .subscribe({ favouriteItems ->
+                Log.d(
+                    TAG,
+                    "${repository.getImplName()} successfully returned the favourite items: $favouriteItems"
+                )
+                favouriteItemsLiveData.postValue(favouriteItems)
+            }, { ex ->
+                Log.e(
+                    TAG,
+                    "${repository.getImplName()} failed to return the favourite items with the exception: ${ex.message}"
+                )
+                errorLiveData.postValue(ex)
+            })
+    }
+
+    fun removeItemFromFavourite(zoomerBox: ZoomerBox) {
+        val authUser = FirebaseAuth.getInstance().currentUser
+        disposable = repository.removeBoxFromFavourite(authUser!!.uid, zoomerBox.name)
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())

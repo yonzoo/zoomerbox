@@ -24,4 +24,6 @@ interface ActivityComponent {
     fun inject(activity: AppSettingsActivity)
 
     fun inject(activity: DefaultActivity)
+
+    fun inject(activity: ZoomerBoxActivity)
 }
