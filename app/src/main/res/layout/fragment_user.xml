@@ -196,6 +196,45 @@
                 android:layout_marginTop="8dp"
                 android:background="@android:color/secondary_text_dark" />
 
+            <LinearLayout
+                android:id="@+id/signOutBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="24dp"
+                    app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/comfortaaregular"
+                    android:text="@string/signout"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    app:srcCompat="@drawable/rightangleicon" />
+            </LinearLayout>
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/secondary_text_dark" />
+
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

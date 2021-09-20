@@ -35,6 +35,7 @@
     <string name="money_amount">%1$s руб.</string>
     <string name="favourite">Избранное</string>
     <string name="settings">Настройки приложения</string>
+    <string name="signout">Выход</string>
     <string name="my_orders">Мои заказы</string>
     <string name="updates">Обновления</string>
     <string name="user_avatar">Аватар</string>

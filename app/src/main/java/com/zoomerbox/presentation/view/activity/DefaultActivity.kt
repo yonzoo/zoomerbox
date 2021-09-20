@@ -1,5 +1,7 @@
 package com.zoomerbox.presentation.view.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -46,5 +48,12 @@ class DefaultActivity : AppCompatActivity() {
         val activityComponent: ActivityComponent =
             ZoomerboxApplication.getAppComponent(this).getActivityComponent()
         activityComponent.inject(this)
+    }
+
+    companion object {
+
+        fun newIntent(context: Context): Intent {
+            return Intent(context, DefaultActivity::class.java)
+        }
     }
 }

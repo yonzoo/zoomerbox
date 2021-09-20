@@ -1,5 +1,6 @@
 package com.zoomerbox.presentation.viewmodel
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
@@ -13,12 +14,14 @@ import io.reactivex.disposables.Disposable
 
 class UserViewModel(
     @NonNull private val repository: IUserRepository,
-    @NonNull private val schedulersProvider: ISchedulersProvider
+    @NonNull private val schedulersProvider: ISchedulersProvider,
+    @NonNull private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
     private val progressLiveData = MutableLiveData<Boolean>()
     private val errorLiveData = MutableLiveData<Throwable>()
     private val userLiveData = MutableLiveData<User>()
+    private val exitLiveData = MutableLiveData<Boolean>()
     private var disposable: Disposable? = null
 
     fun loadUser() {
@@ -43,6 +46,12 @@ class UserViewModel(
             })
     }
 
+    fun signOut() {
+        sharedPreferences.edit().clear().apply()
+        FirebaseAuth.getInstance().signOut()
+        exitLiveData.postValue(true)
+    }
+
     override fun onCleared() {
         super.onCleared()
         disposable?.dispose()
@@ -59,6 +68,10 @@ class UserViewModel(
 
     fun getUserLiveData(): LiveData<User> {
         return userLiveData
+    }
+
+    fun getExitLiveData(): LiveData<Boolean> {
+        return exitLiveData
     }
 
     companion object {
