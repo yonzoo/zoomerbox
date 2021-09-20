@@ -46,7 +46,7 @@ class SignInCodeActivity : AppCompatActivity() {
 
     private fun setObservers() {
         viewModel.getResultLiveData().observe(this, {
-            startActivity(MainActivity.newIntent(this))
+            startActivity(DefaultActivity.newIntent(this))
         })
         viewModel.getProgressLiveData().observe(this, {
             if (it) {
