@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zoomerbox">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".ZoomerboxApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
+        tools:replace="android:allowBackup"
         android:icon="@drawable/v2cubeicon"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -19,7 +20,7 @@
             android:name=".presentation.view.activity.AppSettingsActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/PreferenceScreen"/>
+            android:theme="@style/PreferenceScreen" />
         <activity
             android:name=".presentation.view.activity.CreateOrderActivity"
             android:exported="true"

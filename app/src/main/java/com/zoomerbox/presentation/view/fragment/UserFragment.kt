@@ -14,6 +14,7 @@ import com.zoomerbox.di.fragment.FragmentComponent
 import com.zoomerbox.presentation.view.activity.AppSettingsActivity
 import com.zoomerbox.presentation.view.activity.FavouriteActivity
 import com.zoomerbox.presentation.view.activity.OrdersActivity
+import com.zoomerbox.presentation.view.activity.SignInActivity
 import com.zoomerbox.presentation.viewmodel.UserViewModel
 import com.zoomerbox.presentation.viewmodel.UserViewModelFactory
 import javax.inject.Inject
@@ -45,6 +46,9 @@ class UserFragment : Fragment() {
         binding.goToSettingsBtn.setOnClickListener {
             startActivity(AppSettingsActivity.newIntent(requireContext()))
         }
+        binding.signOutBtn.setOnClickListener {
+            viewModel.signOut()
+        }
 
         viewModel.loadUser()
 
@@ -61,6 +65,9 @@ class UserFragment : Fragment() {
             }
             binding.userName.text = user.username
             binding.userPhone.text = user.phone
+        }
+        viewModel.getExitLiveData().observe(viewLifecycleOwner) {
+            startActivity(SignInActivity.newIntent(requireContext()))
         }
     }
 
