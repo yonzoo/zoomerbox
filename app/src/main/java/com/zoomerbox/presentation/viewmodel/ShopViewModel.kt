@@ -17,7 +17,7 @@ class ShopViewModel(
     private val progressLiveData = MutableLiveData<Boolean>()
     private val errorLiveData = MutableLiveData<Throwable>()
     private val seasonDropLiveData = MutableLiveData<SeasonDrop>()
-    private var disposable: Disposable? = null
+    var disposable: Disposable? = null
 
     fun loadSeasonDrop() {
         disposable = interactor.getSeasonDrop()
@@ -30,6 +30,10 @@ class ShopViewModel(
             }, { ex ->
                 errorLiveData.postValue(ex)
             })
+    }
+
+    fun clearViewModel() {
+        onCleared()
     }
 
     override fun onCleared() {

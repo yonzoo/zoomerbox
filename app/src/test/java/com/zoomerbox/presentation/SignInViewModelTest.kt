@@ -34,9 +34,6 @@ class SignInViewModelTest {
     private lateinit var credential: PhoneAuthCredential
 
     @Mock
-    lateinit var schedulersProvider: ISchedulersProvider
-
-    @Mock
     lateinit var progressLiveDataObserver: Observer<Boolean>
 
     @Mock
@@ -52,8 +49,6 @@ class SignInViewModelTest {
 
     @Before
     fun setUp() {
-        Mockito.`when`(schedulersProvider.io()).thenReturn(Schedulers.trampoline())
-        Mockito.`when`(schedulersProvider.ui()).thenReturn(Schedulers.trampoline())
         signInViewModel = SignInViewModel(firebaseAuth)
         signInViewModel.getErrorLiveData().observeForever(errorLiveDataObserver)
         signInViewModel.getProgressLiveData().observeForever(progressLiveDataObserver)
@@ -76,7 +71,13 @@ class SignInViewModelTest {
 
     @Test
     fun verifyPhoneNumberTestOnCodeSent() {
+        signInViewModel.getCallbacks()
+            .onCodeSent(TEST_VERIFICATION_ID, PhoneAuthProvider.ForceResendingToken.zza())
 
+        val inOrder =
+            Mockito.inOrder(progressLiveDataObserver, redirectLiveDataObserver)
+        inOrder.verify(progressLiveDataObserver).onChanged(false)
+        inOrder.verify(redirectLiveDataObserver).onChanged(TEST_VERIFICATION_ID)
     }
 
     @Test
@@ -177,5 +178,9 @@ class SignInViewModelTest {
             Mockito.inOrder(progressLiveDataObserver, resultLiveDataObserver)
         inOrder.verify(progressLiveDataObserver).onChanged(false)
         inOrder.verify(resultLiveDataObserver).onChanged(expectedResult)
+    }
+
+    companion object {
+        const val TEST_VERIFICATION_ID = "1245"
     }
 }

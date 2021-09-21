@@ -24,11 +24,13 @@ class UserViewModel(
     private val errorLiveData = MutableLiveData<Throwable>()
     private val userLiveData = MutableLiveData<User>()
     private val exitLiveData = MutableLiveData<Boolean>()
-    private var disposable: Disposable? = null
+    var disposable: Disposable? = null
 
     fun loadUser() {
         val authUser = FirebaseAuth.getInstance().currentUser
-        disposable = repository.getUserFromPreferences(authUser!!.uid, authUser.phoneNumber!!)
+        val uid = authUser?.uid ?: ""
+        val phoneNumber = authUser?.phoneNumber ?: ""
+        disposable = repository.getUserFromPreferences(uid, phoneNumber)
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())
@@ -53,6 +55,10 @@ class UserViewModel(
         sharedPreferences.edit().clear().apply()
         FirebaseAuth.getInstance().signOut()
         exitLiveData.postValue(true)
+    }
+
+    fun clearViewModel() {
+        onCleared()
     }
 
     override fun onCleared() {

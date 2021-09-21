@@ -57,8 +57,8 @@ class SignInViewModel(private val auth: FirebaseAuth) : ViewModel() {
                 param1: PhoneAuthProvider.ForceResendingToken
             ) {
                 super.onCodeSent(verificationId, param1)
-                redirectLiveData.postValue(verificationId)
                 progressLiveData.postValue(false)
+                redirectLiveData.postValue(verificationId)
             }
         }
     }

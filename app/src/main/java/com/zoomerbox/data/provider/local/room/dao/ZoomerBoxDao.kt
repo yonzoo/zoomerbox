@@ -12,6 +12,9 @@ interface ZoomerBoxDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(zoomerBoxes: List<ZoomerBoxEntity>): List<Long>
 
+    @Query("SELECT * FROM ZoomerBoxEntity")
+    fun getAll(): List<ZoomerBoxEntity>
+
     @Query("SELECT * FROM ZoomerBoxEntity WHERE id = :id")
     fun getById(id: Long): ZoomerBoxEntity
 

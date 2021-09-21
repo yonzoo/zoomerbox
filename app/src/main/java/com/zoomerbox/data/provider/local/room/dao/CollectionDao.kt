@@ -12,6 +12,9 @@ interface CollectionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(collectionsEntities: List<CollectionEntity>): List<Long>
 
+    @Query("SELECT * FROM CollectionEntity")
+    fun getAll(): List<CollectionEntity>
+
     @Query("SELECT * FROM CollectionEntity WHERE id = :id")
     fun getById(id: Long): CollectionEntity
 
