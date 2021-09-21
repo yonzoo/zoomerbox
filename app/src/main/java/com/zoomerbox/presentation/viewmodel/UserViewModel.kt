@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.zoomerbox.data.repository.ICacheRepository
 import com.zoomerbox.data.repository.IUserRepository
 import com.zoomerbox.model.app.User
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
@@ -14,6 +15,7 @@ import io.reactivex.disposables.Disposable
 
 class UserViewModel(
     @NonNull private val repository: IUserRepository,
+    @NonNull private val cacheRepository: ICacheRepository,
     @NonNull private val schedulersProvider: ISchedulersProvider,
     @NonNull private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
@@ -47,6 +49,7 @@ class UserViewModel(
     }
 
     fun signOut() {
+        cacheRepository.clearCache()
         sharedPreferences.edit().clear().apply()
         FirebaseAuth.getInstance().signOut()
         exitLiveData.postValue(true)

@@ -41,7 +41,7 @@ class SignInViewModel(private val auth: FirebaseAuth) : ViewModel() {
         signInWithCredential(credential)
     }
 
-    private fun getCallbacks(): PhoneAuthProvider.OnVerificationStateChangedCallbacks {
+    fun getCallbacks(): PhoneAuthProvider.OnVerificationStateChangedCallbacks {
         return object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 signInWithCredential(credential)
