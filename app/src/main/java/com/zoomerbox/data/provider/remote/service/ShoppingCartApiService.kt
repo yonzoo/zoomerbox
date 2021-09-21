@@ -1,4 +1,4 @@
-package com.zoomerbox.data.service
+package com.zoomerbox.data.provider.remote.service
 
 import com.zoomerbox.model.dto.ShoppingCartItemDTO
 import com.zoomerbox.model.util.EndpointUrls

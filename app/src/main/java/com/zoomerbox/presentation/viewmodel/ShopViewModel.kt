@@ -1,17 +1,16 @@
 package com.zoomerbox.presentation.viewmodel
 
-import android.util.Log
 import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zoomerbox.data.repository.ISeasonDropRepository
+import com.zoomerbox.domain.ISeasonDropInteractor
 import com.zoomerbox.model.app.SeasonDrop
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.disposables.Disposable
 
 class ShopViewModel(
-    @NonNull private val repository: ISeasonDropRepository,
+    @NonNull private val interactor: ISeasonDropInteractor,
     @NonNull private val schedulersProvider: ISchedulersProvider
 ) : ViewModel() {
 
@@ -21,22 +20,14 @@ class ShopViewModel(
     private var disposable: Disposable? = null
 
     fun loadSeasonDrop() {
-        disposable = repository.getSeasonDrop()
+        disposable = interactor.getSeasonDrop()
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())
             .observeOn(schedulersProvider.ui())
             .subscribe({ drop ->
-                Log.d(
-                    TAG,
-                    "${repository.getImplName()} successfully returned the season drop body: $drop"
-                )
                 seasonDropLiveData.postValue(drop)
             }, { ex ->
-                Log.e(
-                    TAG,
-                    "${repository.getImplName()} failed to return the season drop body with the exception: ${ex.message}"
-                )
                 errorLiveData.postValue(ex)
             })
     }

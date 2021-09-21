@@ -1,7 +1,7 @@
 package com.zoomerbox.model.app
 
 import com.zoomerbox.model.dto.CollectionDTO
-import com.zoomerbox.model.enumeration.ShopListItemTypeEnum
+import com.zoomerbox.model.util.enumeration.ShopListItemTypeEnum
 
 class Collection(val collectionName: String, val boxes: List<ZoomerBox>) : IShopListItem {
 

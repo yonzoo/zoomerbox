@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso
 import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemBannerBinding
 import com.zoomerbox.databinding.ItemCollectionsListBinding
-import com.zoomerbox.model.enumeration.ShopListItemTypeEnum
+import com.zoomerbox.model.util.enumeration.ShopListItemTypeEnum
 import com.zoomerbox.model.app.Banner
 import com.zoomerbox.model.app.Collection
 import com.zoomerbox.model.app.IShopListItem

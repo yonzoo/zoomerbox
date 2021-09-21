@@ -1,7 +1,7 @@
 package com.zoomerbox.data.repository.impl
 
 import com.zoomerbox.data.repository.IFavouriteRepository
-import com.zoomerbox.data.service.FavouriteApiService
+import com.zoomerbox.data.provider.remote.service.FavouriteApiService
 import com.zoomerbox.model.app.ZoomerBox
 import io.reactivex.Single
 import javax.inject.Inject

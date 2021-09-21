@@ -1,6 +1,7 @@
 package com.zoomerbox.model.app
 
 import com.zoomerbox.model.dto.SeasonDropDTO
+import com.zoomerbox.model.entity.SeasonDropEntity
 
 class SeasonDrop(
     val seasonNumber: Int,

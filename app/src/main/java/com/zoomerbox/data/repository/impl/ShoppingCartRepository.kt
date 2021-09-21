@@ -1,7 +1,7 @@
 package com.zoomerbox.data.repository.impl
 
 import com.zoomerbox.data.repository.IShoppingCartRepository
-import com.zoomerbox.data.service.ShoppingCartApiService
+import com.zoomerbox.data.provider.remote.service.ShoppingCartApiService
 import com.zoomerbox.model.app.ShoppingCartItem
 import io.reactivex.Single
 import java.util.stream.Collectors

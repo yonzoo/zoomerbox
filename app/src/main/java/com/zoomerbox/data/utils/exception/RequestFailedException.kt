@@ -1,4 +1,4 @@
-package com.zoomerbox.data.exception
+package com.zoomerbox.data.utils.exception
 
 import java.lang.Exception
 

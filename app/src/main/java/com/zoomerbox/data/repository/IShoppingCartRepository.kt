@@ -1,6 +1,6 @@
 package com.zoomerbox.data.repository
 
-import com.zoomerbox.data.exception.RequestFailedException
+import com.zoomerbox.data.utils.exception.RequestFailedException
 import com.zoomerbox.model.app.ShoppingCartItem
 import io.reactivex.Single
 
