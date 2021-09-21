@@ -12,6 +12,9 @@ interface BoxItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(boxItems: List<BoxItemEntity>): List<Long>
 
+    @Query("SELECT * FROM BoxItemEntity")
+    fun getAll(): List<BoxItemEntity>
+
     @Query("SELECT * FROM BoxItemEntity WHERE id = :id")
     fun getById(id: Long): BoxItemEntity
 

@@ -23,13 +23,14 @@ class ShoppingCartViewModel(
     private val cartItemsLiveData = MutableLiveData<List<ShoppingCartItem>>()
     private val isBoxFavouriteLiveData = MutableLiveData<Boolean>()
     private val cartItemsSelectedLiveData = MutableLiveData<List<ShoppingCartItem>>()
-    private var disposable: Disposable? = null
+    var disposable: Disposable? = null
     var updatedFavouriteItem: ShoppingCartItem? = null
     var updatedSelectedItem: ShoppingCartItem? = null
 
     fun loadShoppingCartItems() {
         val user = FirebaseAuth.getInstance().currentUser
-        disposable = shoppingCartRepository.getShoppingCartItems(user!!.uid)
+        val uid = user?.uid ?: ""
+        disposable = shoppingCartRepository.getShoppingCartItems(uid)
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())
@@ -51,9 +52,10 @@ class ShoppingCartViewModel(
 
     fun toggleBoxFavourite(shoppingCartItem: ShoppingCartItem) {
         val authUser = FirebaseAuth.getInstance().currentUser
+        val uid = authUser?.uid ?: ""
         updatedFavouriteItem = shoppingCartItem;
         disposable =
-            favouriteRepository.toggleFavouriteBox(authUser!!.uid, shoppingCartItem.box.name)
+            favouriteRepository.toggleFavouriteBox(uid, shoppingCartItem.box.name)
                 .doOnSubscribe { progressLiveData.postValue(true) }
                 .doOnTerminate { progressLiveData.postValue(false) }
                 .subscribeOn(schedulersProvider.io())
@@ -75,7 +77,8 @@ class ShoppingCartViewModel(
 
     fun addShoppingCartItem(shoppingCartItem: ShoppingCartItem) {
         val authUser = FirebaseAuth.getInstance().currentUser
-        disposable = shoppingCartRepository.addShoppingCartItem(authUser!!.uid, shoppingCartItem)
+        val uid = authUser?.uid ?: ""
+        disposable = shoppingCartRepository.addShoppingCartItem(uid, shoppingCartItem)
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())
@@ -97,8 +100,9 @@ class ShoppingCartViewModel(
 
     fun removeSingleShoppingCartItem(shoppingCartItem: ShoppingCartItem) {
         val authUser = FirebaseAuth.getInstance().currentUser
+        val uid = authUser?.uid ?: ""
         disposable =
-            shoppingCartRepository.reduceCountOfShoppingCartItems(authUser!!.uid, shoppingCartItem)
+            shoppingCartRepository.reduceCountOfShoppingCartItems(uid, shoppingCartItem)
                 .doOnSubscribe { progressLiveData.postValue(true) }
                 .doOnTerminate { progressLiveData.postValue(false) }
                 .subscribeOn(schedulersProvider.io())
@@ -120,7 +124,8 @@ class ShoppingCartViewModel(
 
     fun deleteShoppingCartItem(shoppingCartItem: ShoppingCartItem) {
         val authUser = FirebaseAuth.getInstance().currentUser
-        disposable = shoppingCartRepository.removeShoppingCartItem(authUser!!.uid, shoppingCartItem)
+        val uid = authUser?.uid ?: ""
+        disposable = shoppingCartRepository.removeShoppingCartItem(uid, shoppingCartItem)
             .doOnSubscribe { progressLiveData.postValue(true) }
             .doOnTerminate { progressLiveData.postValue(false) }
             .subscribeOn(schedulersProvider.io())
@@ -142,8 +147,9 @@ class ShoppingCartViewModel(
 
     fun deleteAllShoppingCartItems(shoppingCartItems: List<ShoppingCartItem>) {
         val authUser = FirebaseAuth.getInstance().currentUser
+        val uid = authUser?.uid ?: ""
         disposable =
-            shoppingCartRepository.removeShoppingCartItems(authUser!!.uid, shoppingCartItems)
+            shoppingCartRepository.removeShoppingCartItems(uid, shoppingCartItems)
                 .doOnSubscribe { progressLiveData.postValue(true) }
                 .doOnTerminate { progressLiveData.postValue(false) }
                 .subscribeOn(schedulersProvider.io())
@@ -165,9 +171,10 @@ class ShoppingCartViewModel(
 
     fun toggleSelectShoppingCartItem(shoppingCartItem: ShoppingCartItem) {
         val authUser = FirebaseAuth.getInstance().currentUser
+        val uid = authUser?.uid ?: ""
         updatedSelectedItem = shoppingCartItem
         disposable =
-            shoppingCartRepository.toggleSelectShoppingCartItem(authUser!!.uid, shoppingCartItem)
+            shoppingCartRepository.toggleSelectShoppingCartItem(uid, shoppingCartItem)
                 .doOnSubscribe { progressLiveData.postValue(true) }
                 .doOnTerminate { progressLiveData.postValue(false) }
                 .subscribeOn(schedulersProvider.io())
@@ -189,8 +196,9 @@ class ShoppingCartViewModel(
 
     fun selectAllShoppingCartItems(shoppingCartItems: List<ShoppingCartItem>) {
         val authUser = FirebaseAuth.getInstance().currentUser
+        val uid = authUser?.uid ?: ""
         disposable =
-            shoppingCartRepository.selectAllShoppingCartItems(authUser!!.uid, shoppingCartItems)
+            shoppingCartRepository.selectAllShoppingCartItems(uid, shoppingCartItems)
                 .doOnSubscribe { progressLiveData.postValue(true) }
                 .doOnTerminate { progressLiveData.postValue(false) }
                 .subscribeOn(schedulersProvider.io())
@@ -212,8 +220,9 @@ class ShoppingCartViewModel(
 
     fun deselectAllShoppingCartItems(shoppingCartItems: List<ShoppingCartItem>) {
         val authUser = FirebaseAuth.getInstance().currentUser
+        val uid = authUser?.uid ?: ""
         disposable =
-            shoppingCartRepository.deselectAllShoppingCartItems(authUser!!.uid, shoppingCartItems)
+            shoppingCartRepository.deselectAllShoppingCartItems(uid, shoppingCartItems)
                 .doOnSubscribe { progressLiveData.postValue(true) }
                 .doOnTerminate { progressLiveData.postValue(false) }
                 .subscribeOn(schedulersProvider.io())
@@ -231,6 +240,10 @@ class ShoppingCartViewModel(
                     )
                     errorLiveData.postValue(ex)
                 })
+    }
+
+    fun clearViewModel() {
+        onCleared()
     }
 
     override fun onCleared() {

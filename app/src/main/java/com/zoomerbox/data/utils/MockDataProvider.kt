@@ -1,4 +1,4 @@
-package com.zoomerbox.data.repository.impl.mock.utils
+package com.zoomerbox.data.utils
 
 import com.zoomerbox.model.dto.BoxItemDTO
 import com.zoomerbox.model.dto.CollectionDTO
@@ -41,7 +41,8 @@ object MockDataProvider {
                     imageUrls = getMockBoxImageUrls(),
                     price = getMockPrice(),
                     description = getMockBoxDescription(),
-                    items = getItems())
+                    items = getItems()
+                )
             )
         }
         return boxes
@@ -54,7 +55,8 @@ object MockDataProvider {
                 BoxItemDTO(
                     name = "Предмет $i",
                     imageUrls = getMockItemImageUrls(),
-                    description = getMockItemDescription())
+                    description = getMockItemDescription()
+                )
             )
         }
         return items
@@ -67,7 +69,8 @@ object MockDataProvider {
                 BoxItemDTO(
                     name = "Редкий предмет $i",
                     imageUrls = getMockItemImageUrls(),
-                    description = getMockItemDescription())
+                    description = getMockItemDescription()
+                )
             )
         }
         return items

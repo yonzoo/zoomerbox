@@ -18,7 +18,7 @@ class UserRepository @Inject constructor(
             .map { userDTO -> User.buildFromDTO(userDTO) }
     }
 
-    override fun getUserFromPreferences(uid: String, phoneNumber: String): Single<User> {
+    override fun getUserFromPreferences(uid: String?, phoneNumber: String?): Single<User> {
         return Single.fromCallable {
             User(
                 prefs.getString(PrefsKeys.UID, "")!!,
