@@ -7,9 +7,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.zoomerbox.ZoomerboxApplication
 import com.zoomerbox.data.repository.*
 import com.zoomerbox.data.repository.impl.*
-import com.zoomerbox.data.store.ICartItemsStore
-import com.zoomerbox.data.store.impl.CartItemsStorePrefsImpl
+import com.zoomerbox.domain.ISeasonDropInteractor
 import com.zoomerbox.domain.IUserInteractor
+import com.zoomerbox.domain.impl.SeasonDropInteractor
 import com.zoomerbox.domain.impl.UserInteractor
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import com.zoomerbox.presentation.view.util.SchedulersProvider
@@ -46,9 +46,6 @@ class AppModule(
     interface BindsModule {
 
         @Binds
-        fun bindStore(impl: CartItemsStorePrefsImpl): ICartItemsStore
-
-        @Binds
         fun bindSeasonDropRepository(impl: SeasonDropRepository): ISeasonDropRepository
 
         @Binds
@@ -61,6 +58,9 @@ class AppModule(
         fun bindFavouriteRepository(impl: FavouriteRepository): IFavouriteRepository
 
         @Binds
+        fun bindCacheRepository(impl: CacheRepository): ICacheRepository
+
+        @Binds
         fun bindOrdersRepository(impl: OrdersRepository): IOrdersRepository
 
         @Binds
@@ -68,5 +68,8 @@ class AppModule(
 
         @Binds
         fun bindUserInteractor(impl: UserInteractor): IUserInteractor
+
+        @Binds
+        fun bindSeasonDropInteractor(impl: SeasonDropInteractor): ISeasonDropInteractor
     }
 }

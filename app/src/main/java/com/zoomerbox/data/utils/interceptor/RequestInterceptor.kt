@@ -1,9 +1,4 @@
-package com.zoomerbox.data.interceptor
-
-import com.zoomerbox.ZoomerboxApplication
-import okhttp3.Interceptor
-import okhttp3.Response
-import java.io.IOException
+package com.zoomerbox.data.utils.interceptor
 
 //class RequestInterceptor : Interceptor {
 //

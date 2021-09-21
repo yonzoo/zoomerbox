@@ -2,7 +2,7 @@ package com.zoomerbox.data.repository.impl
 
 import android.content.SharedPreferences
 import com.zoomerbox.data.repository.IUserRepository
-import com.zoomerbox.data.service.UserApiService
+import com.zoomerbox.data.provider.remote.service.UserApiService
 import com.zoomerbox.model.app.User
 import com.zoomerbox.model.util.PrefsKeys
 import io.reactivex.Single

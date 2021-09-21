@@ -1,6 +1,6 @@
 package com.zoomerbox.model.dto
 
-import com.zoomerbox.model.enumeration.OrderStatusEnum
+import com.zoomerbox.model.util.enumeration.OrderStatusEnum
 
 data class OrderDTO(
     val boxes: List<OrderBoxDTO>,

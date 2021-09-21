@@ -5,9 +5,8 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zoomerbox.data.store.ICartItemsStore
+import com.zoomerbox.data.repository.ICacheRepository
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
-import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 
 /**
@@ -18,7 +17,7 @@ import io.reactivex.disposables.Disposable
  * @param schedulersProvider провайдер шедулеров
  */
 class SettingsViewModel(
-    @NonNull private val store: ICartItemsStore,
+    @NonNull private val cacheRepository: ICacheRepository,
     @NonNull private val schedulersProvider: ISchedulersProvider
 ) : ViewModel() {
 
@@ -29,10 +28,7 @@ class SettingsViewModel(
      * Метод для очистки кэша.
      */
     fun clearCache() {
-        disposable = Single
-            .fromCallable {
-                store.clearCartItems()
-            }
+        disposable = cacheRepository.clearCache()
             .doOnSubscribe {
                 resultLiveData.postValue(false)
             }

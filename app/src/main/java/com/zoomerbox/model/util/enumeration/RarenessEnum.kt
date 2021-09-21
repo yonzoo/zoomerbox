@@ -1,4 +1,4 @@
-package com.zoomerbox.model.enumeration
+package com.zoomerbox.model.util.enumeration
 
 enum class RarenessEnum {
     CASUAL,

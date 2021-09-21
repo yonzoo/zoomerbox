@@ -1,6 +1,6 @@
 package com.zoomerbox.domain.util
 
-import com.zoomerbox.model.enumeration.OrderStatusEnum
+import com.zoomerbox.model.util.enumeration.OrderStatusEnum
 
 object StatusResolver {
 

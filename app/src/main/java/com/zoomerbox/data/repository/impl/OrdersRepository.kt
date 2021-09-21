@@ -1,7 +1,7 @@
 package com.zoomerbox.data.repository.impl
 
 import com.zoomerbox.data.repository.IOrdersRepository
-import com.zoomerbox.data.service.OrdersApiService
+import com.zoomerbox.data.provider.remote.service.OrdersApiService
 import com.zoomerbox.model.app.Order
 import com.zoomerbox.model.app.OrderBox
 import io.reactivex.Single
