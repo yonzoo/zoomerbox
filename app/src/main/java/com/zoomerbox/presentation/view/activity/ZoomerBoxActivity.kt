@@ -24,6 +24,9 @@ import com.zoomerbox.presentation.viewmodel.ZoomerBoxViewModel
 import com.zoomerbox.presentation.viewmodel.ZoomerBoxViewModelFactory
 import javax.inject.Inject
 
+/**
+ * Экран с информацией о боксе
+ */
 class ZoomerBoxActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityZoomerBoxBinding

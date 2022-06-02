@@ -6,6 +6,12 @@ import com.zoomerbox.data.repository.IOrdersRepository
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import javax.inject.Inject
 
+/**
+ * Фабрика для создания ViewModel для экрана создания заказа
+ *
+ * @param ordersRepository репозиторий данных по заказам
+ * @param schedulersProvider провайдер доступа к потокам
+ */
 class CreateOrderViewModelFactory @Inject constructor(
     private val ordersRepository: IOrdersRepository,
     private val schedulersProvider: ISchedulersProvider

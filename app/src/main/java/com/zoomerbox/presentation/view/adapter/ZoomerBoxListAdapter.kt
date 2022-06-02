@@ -11,6 +11,11 @@ import com.zoomerbox.databinding.ItemCollabBoxBinding
 import com.zoomerbox.model.app.ZoomerBox
 import com.zoomerbox.presentation.view.activity.ZoomerBoxActivity
 
+/**
+ * Адаптер, который умеет отображать список боксов
+ *
+ * @param zoomerBoxList список боксов
+ */
 class ZoomerBoxListAdapter(
     private var zoomerBoxList: List<ZoomerBox>
 ) : RecyclerView.Adapter<ZoomerBoxListAdapter.ViewHolder>() {

@@ -18,6 +18,9 @@ import com.zoomerbox.presentation.viewmodel.CreateOrderViewModel
 import com.zoomerbox.presentation.viewmodel.CreateOrderViewModelFactory
 import javax.inject.Inject
 
+/**
+ * Экран для создания заказа
+ */
 class CreateOrderActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateOrderBinding
@@ -64,9 +67,7 @@ class CreateOrderActivity : AppCompatActivity() {
             orderAdapter.notifyDataSetChanged()
         }
         viewModel.getOrderLiveData().observe(this) {
-            Toast.makeText(this, "Заказ успешно создан!", Toast.LENGTH_SHORT)
-                .show()
-            finish()
+            startActivity(OrderStatusInfoActivity.newIntent(this))
         }
     }
 

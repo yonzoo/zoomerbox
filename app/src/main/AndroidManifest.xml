@@ -18,6 +18,10 @@
         tools:replace="android:allowBackup"
         tools:targetApi="n">
         <activity
+            android:name=".presentation.view.activity.OrderStatusInfoActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".presentation.view.activity.AppSettingsActivity"
             android:exported="true"
             android:screenOrientation="portrait"

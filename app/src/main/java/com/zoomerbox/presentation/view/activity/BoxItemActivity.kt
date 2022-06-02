@@ -15,6 +15,9 @@ import com.zoomerbox.model.app.SliderItem
 import com.zoomerbox.presentation.view.adapter.SliderAdapter
 import com.zoomerbox.presentation.view.util.BundleKeys
 
+/**
+ * Экран с деталями о предмете внутри бокса
+ */
 class BoxItemActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBoxItemBinding

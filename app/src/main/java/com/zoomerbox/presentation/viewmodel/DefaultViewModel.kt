@@ -12,6 +12,12 @@ import com.zoomerbox.model.app.User
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.disposables.Disposable
 
+/**
+ * ViewModel для базового экрана в котором происходит аутентификация и редирект пользователя
+ *
+ * @param interactor интерактор для обработки данных пользователя
+ * @param schedulersProvider провайдер доступа к потокам
+ */
 class DefaultViewModel(
     @NonNull private val interactor: IUserInteractor,
     @NonNull private val schedulersProvider: ISchedulersProvider
@@ -27,16 +33,27 @@ class DefaultViewModel(
         if (user == null) {
             errorLiveData.postValue(UserNotAuthenticatedException())
         } else {
+            user.getIdToken(true).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val result = task.result
+                    if (result != null) {
+                        result.token?.let {
+                            getUserCredentials(it, user.phoneNumber!!)
+                        }
+                    }
+                } else {
+                    errorLiveData.postValue(UserNotAuthenticatedException())
+                }
+            }
             if (user.phoneNumber == null) {
                 errorLiveData.postValue(UserNotAuthenticatedException())
             }
-            getUserCredentials(user.uid, user.phoneNumber!!)
         }
     }
 
-    private fun getUserCredentials(uid: String, phoneNumber: String) {
+    private fun getUserCredentials(token: String, phoneNumber: String) {
         disposable =
-            interactor.getUserCredentials(uid, phoneNumber)
+            interactor.getUserCredentials(token, phoneNumber)
                 .doOnSubscribe { progressLiveData.postValue(true) }
                 .doOnTerminate { progressLiveData.postValue(false) }
                 .subscribeOn(schedulersProvider.io())

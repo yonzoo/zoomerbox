@@ -18,6 +18,9 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
+/**
+ * Экран для ввода кода из СМС после аутентификации через номер телефона
+ */
 class SignInCodeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInCodeBinding
@@ -45,10 +48,10 @@ class SignInCodeActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
-        viewModel.getResultLiveData().observe(this, {
+        viewModel.getResultLiveData().observe(this) {
             startActivity(DefaultActivity.newIntent(this))
-        })
-        viewModel.getProgressLiveData().observe(this, {
+        }
+        viewModel.getProgressLiveData().observe(this) {
             if (it) {
                 binding.waveProgressView.visibility = View.VISIBLE
                 binding.waveProgressView.translationY = 1000F
@@ -58,6 +61,7 @@ class SignInCodeActivity : AppCompatActivity() {
                     .animate()
                     .alpha(1.0F)
                     .translationY(0F).interpolator = LinearInterpolator()
+                binding.logoText2.animate().translationY(1000F)
             } else {
                 binding.waveProgressView.translationY = 0F
                 binding.waveProgressView.alpha = 1.0F
@@ -65,13 +69,14 @@ class SignInCodeActivity : AppCompatActivity() {
                     .animate()
                     .alpha(0F)
                     .translationY(1000F).interpolator = LinearInterpolator()
+                binding.logoText2.animate().translationY(-1000F)
             }
-        })
-        viewModel.getErrorLiveData().observe(this, {
+        }
+        viewModel.getErrorLiveData().observe(this) {
             Log.d("${TAG}_ERROR", it.message.toString())
             errorText.text = "Провалище! Проверьте введенный код и попробуйте снова."
             errorText.visibility = View.VISIBLE
-        })
+        }
     }
 
     private fun setListeners() {

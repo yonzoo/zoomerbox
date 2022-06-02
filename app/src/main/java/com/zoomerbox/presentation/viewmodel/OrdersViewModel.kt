@@ -11,6 +11,12 @@ import com.zoomerbox.model.app.Order
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.disposables.Disposable
 
+/**
+ * ViewModel для экрана c заказами
+ *
+ * @param repository репозиторий данных по заказам
+ * @param schedulersProvider провайдер доступа к потокам
+ */
 class OrdersViewModel(
     @NonNull private val repository: IOrdersRepository,
     @NonNull private val schedulersProvider: ISchedulersProvider

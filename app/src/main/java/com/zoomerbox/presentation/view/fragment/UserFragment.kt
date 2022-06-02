@@ -19,6 +19,9 @@ import com.zoomerbox.presentation.viewmodel.UserViewModel
 import com.zoomerbox.presentation.viewmodel.UserViewModelFactory
 import javax.inject.Inject
 
+/**
+ * Главный экран с профилем пользователя
+ */
 class UserFragment : Fragment() {
 
     private lateinit var binding: FragmentUserBinding

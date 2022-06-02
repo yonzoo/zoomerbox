@@ -12,6 +12,9 @@ import com.zoomerbox.presentation.viewmodel.SettingsViewModel
 import com.zoomerbox.presentation.viewmodel.SettingsViewModelFactory
 import javax.inject.Inject
 
+/**
+ * Экран настроек приложения
+ */
 class AppSettingsFragment : PreferenceFragmentCompat() {
 
     private lateinit var viewModel: SettingsViewModel
@@ -31,11 +34,11 @@ class AppSettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
-        viewModel.getResultLiveData().observe(this, {
+        viewModel.getResultLiveData().observe(this) {
             if (it) {
                 Toast.makeText(context, "Кэш очищен!", Toast.LENGTH_LONG).show()
             }
-        })
+        }
     }
 
     private fun provideDependencies() {

@@ -17,6 +17,9 @@ import com.zoomerbox.presentation.viewmodel.OrdersViewModel
 import com.zoomerbox.presentation.viewmodel.OrdersViewModelFactory
 import javax.inject.Inject
 
+/**
+ * Экран со списком заказов
+ */
 class OrdersActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOrdersBinding
@@ -31,6 +34,9 @@ class OrdersActivity : AppCompatActivity() {
         binding = ActivityOrdersBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.ordersToMain.setOnClickListener {
+            startActivity(MainActivity.newIntent(this))
+        }
         binding.ordersList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.ordersList.adapter = ordersAdapter
@@ -58,8 +64,7 @@ class OrdersActivity : AppCompatActivity() {
             val ordersCopy = orders.toMutableList()
             ordersCopy.forEach { order ->
                 order.totalOrderSum =
-                    order.boxes.map { orderBox -> orderBox.count * orderBox.box.price.toInt() }
-                        .sum()
+                    order.boxes.sumOf { orderBox -> orderBox.count * orderBox.box.price.toInt() }
             }
             ordersAdapter.setData(orders)
             ordersAdapter.notifyDataSetChanged()

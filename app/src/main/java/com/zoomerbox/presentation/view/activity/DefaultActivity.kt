@@ -12,7 +12,10 @@ import com.zoomerbox.presentation.viewmodel.DefaultViewModel
 import com.zoomerbox.presentation.viewmodel.DefaultViewModelFactory
 import javax.inject.Inject
 
-
+/**
+ * Базовая активити, в которой происходит аутентификация пользователя и редирект
+ * на экран авторизации или экран с товарами
+ */
 class DefaultActivity : AppCompatActivity() {
 
     private lateinit var viewModel: DefaultViewModel

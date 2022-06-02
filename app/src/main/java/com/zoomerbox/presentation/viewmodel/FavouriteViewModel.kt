@@ -11,6 +11,12 @@ import com.zoomerbox.model.app.ZoomerBox
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.disposables.Disposable
 
+/**
+ * ViewModel для экрана c избранными боксами
+ *
+ * @param repository репозиторий с избранными боксами
+ * @param schedulersProvider провайдер доступа к потокам
+ */
 class FavouriteViewModel(
     @NonNull private val repository: IFavouriteRepository,
     @NonNull private val schedulersProvider: ISchedulersProvider

@@ -7,6 +7,10 @@ import com.zoomerbox.di.AppComponent
 import com.zoomerbox.di.DaggerAppComponent
 import com.zoomerbox.di.module.AppModule
 
+/**
+ *
+ * Объект приложения
+ */
 class ZoomerboxApplication : Application() {
 
     private lateinit var appComponent: AppComponent

@@ -11,6 +11,11 @@ import com.zoomerbox.databinding.ItemOrdersBinding
 import com.zoomerbox.domain.util.StatusResolver
 import com.zoomerbox.model.app.Order
 
+/**
+ * Адаптер, который умеет отображать список заказов
+ *
+ * @param orderList список заказов
+ */
 class OrdersAdapter(
     private var orderList: List<Order>
 ) : RecyclerView.Adapter<OrdersAdapter.OrderViewHolder>() {

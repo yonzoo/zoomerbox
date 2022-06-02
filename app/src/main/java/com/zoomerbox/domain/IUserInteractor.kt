@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface IUserInteractor {
 
-    fun getUserCredentials(uid: String, phone: String): Single<User>
+    fun getUserCredentials(token: String, phone: String): Single<User>
 }

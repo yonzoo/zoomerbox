@@ -4,6 +4,13 @@ import android.os.Parcelable
 import com.zoomerbox.model.dto.OrderBoxDTO
 import kotlinx.android.parcel.Parcelize
 
+/**
+ *
+ * Модель с данными по коробке в заказе
+ *
+ * @param box заказываемый бокс
+ * @param count количество боксов для заказа
+ */
 @Parcelize
 class OrderBox(
     val box: ZoomerBox,

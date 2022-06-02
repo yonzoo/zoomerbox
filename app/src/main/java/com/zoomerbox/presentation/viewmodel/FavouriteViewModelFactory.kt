@@ -6,6 +6,12 @@ import com.zoomerbox.data.repository.IFavouriteRepository
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import javax.inject.Inject
 
+/**
+ * Фабрика для создания ViewModel для экрана с избранными боксами
+ *
+ * @param favouriteRepository репозиторий данных по избранным боксам
+ * @param schedulersProvider провайдер доступа к потокам
+ */
 class FavouriteViewModelFactory @Inject constructor(
     private val favouriteRepository: IFavouriteRepository,
     private val schedulersProvider: ISchedulersProvider

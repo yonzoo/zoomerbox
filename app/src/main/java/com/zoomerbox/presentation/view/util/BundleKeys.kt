@@ -1,5 +1,8 @@
 package com.zoomerbox.presentation.view.util
 
+/**
+ * Константы ключей, используемых в интентах и бандлах
+ */
 object BundleKeys {
 
     const val VERIFICATION_ID = "VERIFICATION_ID"

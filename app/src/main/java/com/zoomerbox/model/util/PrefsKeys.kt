@@ -1,5 +1,9 @@
 package com.zoomerbox.model.util
 
+/**
+ *
+ * Ключи для объектов в shared preferences
+ */
 object PrefsKeys {
 
     const val UID = "uid"

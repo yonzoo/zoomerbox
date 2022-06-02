@@ -10,6 +10,16 @@ import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemShoppingCartBinding
 import com.zoomerbox.model.app.ShoppingCartItem
 
+/**
+ * Адаптер, который умеет отображать список содержимого корзины
+ *
+ * @param cartItems список с предметами корзины
+ * @param onItemFavouriteToggled вызывается при клике на кнопку лайка предмета корзины
+ * @param onItemDeleted вызывается при клике на кнопку удаления предмета корзины (удалятся все боксы одного типа)
+ * @param onItemSelectToggled вызывается при клике на кнопку выбора предмета корзины
+ * @param onItemAdded вызывается при клике на кнопку добавления еще одного предмета корзины
+ * @param onSingleItemRemoved вызывается при клипке на кнопку удаления предмета корзины (удалится один бокс одного типа)
+ */
 class CartItemsListAdapter(
     private var cartItems: List<ShoppingCartItem>,
     private val onItemFavouriteToggled: (ShoppingCartItem) -> Unit,

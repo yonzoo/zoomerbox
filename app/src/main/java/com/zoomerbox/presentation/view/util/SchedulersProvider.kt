@@ -6,6 +6,11 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Реализация интерфейса для предоставления доступа к потокам
+ *
+ * @see ISchedulersProvider
+ */
 @Singleton
 class SchedulersProvider @Inject constructor() : ISchedulersProvider {
 

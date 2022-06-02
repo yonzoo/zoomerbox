@@ -17,6 +17,9 @@ import com.zoomerbox.presentation.viewmodel.FavouriteViewModel
 import com.zoomerbox.presentation.viewmodel.FavouriteViewModelFactory
 import javax.inject.Inject
 
+/**
+ * Экран с избранными боксами
+ */
 class FavouriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavouriteBinding

@@ -19,6 +19,9 @@ import com.zoomerbox.presentation.viewmodel.ShoppingCartViewModel
 import com.zoomerbox.presentation.viewmodel.ShoppingCartViewModelFactory
 import javax.inject.Inject
 
+/**
+ * Главный экран с корзиной
+ */
 class ShoppingCartFragment : Fragment() {
 
     private lateinit var binding: FragmentShoppingCartBinding

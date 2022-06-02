@@ -7,7 +7,7 @@ import io.reactivex.Single
 interface IUserRepository {
 
     @Throws(RequestFailedException::class)
-    fun getUser(uid: String, phoneNumber: String): Single<User>
+    fun getUser(token: String, phoneNumber: String): Single<User>
 
     fun getUserFromPreferences(uid: String?, phoneNumber: String?): Single<User>
 

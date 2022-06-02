@@ -11,9 +11,9 @@ import io.reactivex.disposables.Disposable
 
 /**
  *
- * ViewModel настроек приложения.
+ * ViewModel для экрана настроек приложения.
  *
- * @param store хранилище новостей
+ * @param cacheRepository репозиторий с данными из кеша
  * @param schedulersProvider провайдер шедулеров
  */
 class SettingsViewModel(

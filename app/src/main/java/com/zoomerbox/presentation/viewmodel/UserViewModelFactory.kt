@@ -8,6 +8,14 @@ import com.zoomerbox.data.repository.impl.CacheRepository
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import javax.inject.Inject
 
+/**
+ * Фабрика для создания ViewModel для экрана с информацией о пользователе
+ *
+ * @param userRepository репозиторий с данными о пользователе
+ * @param cacheRepository репозиторий с данными из кеша
+ * @param schedulersProvider провайдер доступа к потокам
+ * @param sharedPreferences объект с префами
+ */
 class UserViewModelFactory @Inject constructor(
     private val userRepository: IUserRepository,
     private val cacheRepository: CacheRepository,

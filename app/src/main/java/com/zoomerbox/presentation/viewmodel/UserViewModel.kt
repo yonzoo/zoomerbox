@@ -13,6 +13,15 @@ import com.zoomerbox.model.app.User
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.disposables.Disposable
 
+/**
+ *
+ * ViewModel для экрана с информацией о пользователе.
+ *
+ * @param repository репозиторий с данными о пользователе
+ * @param cacheRepository репозиторий с данными из кеша
+ * @param schedulersProvider провайдер доступа к потокам
+ * @param sharedPreferences объект с префами
+ */
 class UserViewModel(
     @NonNull private val repository: IUserRepository,
     @NonNull private val cacheRepository: ICacheRepository,

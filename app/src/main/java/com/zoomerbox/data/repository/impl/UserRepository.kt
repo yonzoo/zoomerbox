@@ -13,8 +13,8 @@ class UserRepository @Inject constructor(
     private val prefs: SharedPreferences
 ) : IUserRepository {
 
-    override fun getUser(uid: String, phoneNumber: String): Single<User> {
-        return userApiService.getUser(uid, phoneNumber)
+    override fun getUser(token: String, phoneNumber: String): Single<User> {
+        return userApiService.getUser(token, phoneNumber)
             .map { userDTO -> User.buildFromDTO(userDTO) }
     }
 

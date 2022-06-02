@@ -11,6 +11,11 @@ import com.zoomerbox.databinding.ItemFavouriteBinding
 import com.zoomerbox.model.app.ZoomerBox
 import com.zoomerbox.presentation.view.activity.ZoomerBoxActivity
 
+/**
+ * Адаптер, который умеет отображать избранные боксы
+ *
+ * @param onItemRemovedFromFavourite вызывается при клике на кнопку удаления бокса из избранного
+ */
 class FavouriteItemsListAdapter(
     private var favouriteItems: List<ZoomerBox>,
     private val onItemRemovedFromFavourite: (ZoomerBox) -> Unit,

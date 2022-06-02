@@ -11,6 +11,11 @@ import com.zoomerbox.R
 import com.zoomerbox.databinding.ItemImageSwitcherBinding
 import com.zoomerbox.model.app.SliderItem
 
+/**
+ * Адаптер, который умеет отображать картинки в слайдере
+ *
+ * @param sliderItems список с url картинок
+ */
 class SliderAdapter(
     private var sliderItems: MutableList<SliderItem>
 ) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {

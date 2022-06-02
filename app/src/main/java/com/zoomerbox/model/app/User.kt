@@ -4,6 +4,15 @@ import android.os.Parcelable
 import com.zoomerbox.model.dto.UserDTO
 import kotlinx.android.parcel.Parcelize
 
+/**
+ *
+ * Модель с данными пользователя
+ *
+ * @param uid id пользователя
+ * @param username юзернейм пользователя
+ * @param phone номер телефон пользователя
+ * @param avatarUrl url аватара
+ */
 @Parcelize
 class User(
     val uid: String,

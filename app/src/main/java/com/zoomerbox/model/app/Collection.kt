@@ -3,6 +3,13 @@ package com.zoomerbox.model.app
 import com.zoomerbox.model.dto.CollectionDTO
 import com.zoomerbox.model.util.enumeration.ShopListItemTypeEnum
 
+/**
+ *
+ * Модель с данными коллекции (категории) боксов
+ *
+ * @param collectionName название коллекции
+ * @param boxes список боксов
+ */
 class Collection(val collectionName: String, val boxes: List<ZoomerBox>) : IShopListItem {
 
     override fun getType(): ShopListItemTypeEnum {

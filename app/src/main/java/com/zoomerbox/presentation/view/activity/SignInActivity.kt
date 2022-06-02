@@ -18,6 +18,9 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
+/**
+ * Экран аутентификации через номер телефона
+ */
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
@@ -47,10 +50,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
-        viewModel.getResultLiveData().observe(this, {
+        viewModel.getResultLiveData().observe(this) {
             startActivity(MainActivity.newIntent(this))
-        })
-        viewModel.getProgressLiveData().observe(this, {
+        }
+        viewModel.getProgressLiveData().observe(this) {
             if (it) {
                 binding.waveLoadingView.visibility = View.VISIBLE
                 binding.waveLoadingView.translationY = 1000F
@@ -60,6 +63,7 @@ class SignInActivity : AppCompatActivity() {
                     .animate()
                     .alpha(1.0F)
                     .translationY(0F).interpolator = LinearInterpolator()
+                binding.logoText3.animate().translationY(1000F)
             } else {
                 binding.waveLoadingView.translationY = 0F
                 binding.waveLoadingView.alpha = 1.0F
@@ -67,21 +71,22 @@ class SignInActivity : AppCompatActivity() {
                     .animate()
                     .alpha(0F)
                     .translationY(1000F).interpolator = LinearInterpolator()
+                binding.logoText3.animate().translationY(-1000F)
             }
-        })
-        viewModel.getErrorLiveData().observe(this, {
+        }
+        viewModel.getErrorLiveData().observe(this) {
             Log.d("${TAG}_ERROR", it.message.toString())
             errorText.text = "Провалище! Проверьте номер телефона и попробуйте снова."
             errorText.visibility = View.VISIBLE
-        })
-        viewModel.getRedirectLiveData().observe(this, { verificationId ->
+        }
+        viewModel.getRedirectLiveData().observe(this) { verificationId ->
             val intent = SignInCodeActivity.newIntent(this).apply {
                 val phoneNumber = "+7${binding.phoneNumberText.text}"
                 putExtra(BundleKeys.VERIFICATION_ID, verificationId)
                 putExtra(BundleKeys.PHONE_NUMBER, phoneNumber)
             }
             startActivity(intent)
-        })
+        }
     }
 
     private fun createViewModel() {

@@ -7,6 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.zoomerbox.R
 import com.zoomerbox.presentation.view.fragment.AppSettingsFragment
 
+/**
+ * Хост активити для фрагмента с настройками приложения
+ * @see AppSettingsFragment
+ */
 class AppSettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

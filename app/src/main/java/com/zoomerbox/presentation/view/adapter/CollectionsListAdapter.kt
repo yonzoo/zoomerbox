@@ -15,6 +15,11 @@ import com.zoomerbox.model.app.Banner
 import com.zoomerbox.model.app.Collection
 import com.zoomerbox.model.app.IShopListItem
 
+/**
+ * Адаптер, который умеет отображать список коллекций боксов (категорий)
+ *
+ * @param shopItemList список коллекций боксов
+ */
 class CollectionsListAdapter(
     private var shopItemList: List<IShopListItem>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

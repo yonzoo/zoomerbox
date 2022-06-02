@@ -10,7 +10,7 @@ interface UserApiService {
 
     @GET("${BASE_URL}/user")
     fun getUser(
-        @Query("uid") uid: String,
+        @Query("token") token: String,
         @Query("phone") phone: String
     ): Single<UserDTO>
 }

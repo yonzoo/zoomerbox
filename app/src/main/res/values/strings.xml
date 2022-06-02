@@ -9,6 +9,8 @@
     <string name="getSmsCodeText">Получить код</string>
     <string name="verifyCodeBtn">Подтвердить код</string>
     <string name="addToCartBtn">Добавить в корзину</string>
+    <string name="toMainButton">На главную</string>
+    <string name="showAllOrders">Посмотреть все заказы</string>
     <string name="phoneCodePlacheloder">+7</string>
     <string name="sendOnceMore">Отправить еще раз</string>
     <string name="shop_icon">shop_icon</string>

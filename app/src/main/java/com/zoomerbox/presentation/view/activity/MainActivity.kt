@@ -12,6 +12,9 @@ import com.zoomerbox.presentation.view.fragment.ShopFragment
 import com.zoomerbox.presentation.view.fragment.ShoppingCartFragment
 import com.zoomerbox.presentation.view.fragment.UserFragment
 
+/**
+ * Базовая активити для главных экранов
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -97,6 +100,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+        val TAG: String = this::class.java.declaringClass.simpleName
 
         fun newIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)

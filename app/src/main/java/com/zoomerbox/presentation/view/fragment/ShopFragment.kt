@@ -17,6 +17,9 @@ import com.zoomerbox.presentation.viewmodel.ShopViewModel
 import com.zoomerbox.presentation.viewmodel.ShopViewModelFactory
 import javax.inject.Inject
 
+/**
+ * Главный экран со списком товаров
+ */
 class ShopFragment : Fragment() {
 
     private lateinit var binding: FragmentShopBinding
@@ -46,19 +49,22 @@ class ShopFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setObservers() {
-        viewModel.getSeasonDropLiveData().observe(viewLifecycleOwner, { seasonDrop ->
+        viewModel.getSeasonDropLiveData().observe(viewLifecycleOwner) { seasonDrop ->
             val newData: List<IShopListItem> =
-                listOf(seasonDrop.banner, *seasonDrop.collections.sortedBy { it.collectionName }.reversed().toTypedArray())
+                listOf(
+                    seasonDrop.banner,
+                    *seasonDrop.collections.sortedBy { it.collectionName }.reversed().toTypedArray()
+                )
             collectionsListAdapter.setData(newData)
             collectionsListAdapter.notifyDataSetChanged()
-        })
-        viewModel.getProgressLiveData().observe(viewLifecycleOwner, { showProgress ->
+        }
+        viewModel.getProgressLiveData().observe(viewLifecycleOwner) { showProgress ->
             if (showProgress) {
                 binding.shopItemsProgress.visibility = View.VISIBLE
             } else {
                 binding.shopItemsProgress.visibility = View.GONE
             }
-        })
+        }
     }
 
     private fun createViewModel() {

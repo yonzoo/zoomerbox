@@ -7,6 +7,14 @@ import com.zoomerbox.data.repository.IShoppingCartRepository
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import javax.inject.Inject
 
+/**
+ * Фабрика для создания ViewModel для экрана с деталями бокса
+ *
+ * @param userRepository репозиторий с данными о пользователе
+ * @param cacheRepository репозиторий с данными из кеша
+ * @param schedulersProvider провайдер доступа к потокам
+ * @param sharedPreferences объект с префами
+ */
 class ZoomerBoxViewModelFactory @Inject constructor(
     private val shoppingCartRepository: IShoppingCartRepository,
     private val favouriteRepository: IFavouriteRepository,

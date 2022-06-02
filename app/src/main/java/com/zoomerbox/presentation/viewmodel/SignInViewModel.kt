@@ -13,6 +13,12 @@ import com.google.firebase.auth.PhoneAuthProvider
 import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 
+/**
+ *
+ * ViewModel для экрана входа в приложение.
+ *
+ * @param auth объект, выполняющий аутентификацию пользователя через Firebase
+ */
 class SignInViewModel(private val auth: FirebaseAuth) : ViewModel() {
 
     private val progressLiveData = MutableLiveData<Boolean>()

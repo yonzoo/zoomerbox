@@ -9,6 +9,13 @@ import com.zoomerbox.model.app.SeasonDrop
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.disposables.Disposable
 
+/**
+ *
+ * ViewModel для экрана c товарами.
+ *
+ * @param interactor интерактор для получения и обработки товаров
+ * @param schedulersProvider провайдер доступа к потокам
+ */
 class ShopViewModel(
     @NonNull private val interactor: ISeasonDropInteractor,
     @NonNull private val schedulersProvider: ISchedulersProvider

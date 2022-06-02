@@ -3,6 +3,16 @@ package com.zoomerbox.model.app
 import com.zoomerbox.model.dto.OrderDTO
 import com.zoomerbox.model.util.enumeration.OrderStatusEnum
 
+/**
+ *
+ * Модель с данными заказа
+ *
+ * @param boxes список боксов в заказе
+ * @param date дата заказа
+ * @param orderNumber номер заказа
+ * @param orderStatus статус заказа
+ * @param totalOrderSum сумма заказа
+ */
 class Order(
     val boxes: List<OrderBox>,
     val date: String,

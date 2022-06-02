@@ -4,6 +4,14 @@ import android.os.Parcelable
 import com.zoomerbox.model.dto.BoxItemDTO
 import kotlinx.android.parcel.Parcelize
 
+/**
+ *
+ * Модель с деталями предмета внутри бокса
+ *
+ * @param name имя предмета
+ * @param imageUrls список с изображениями предмета
+ * @param description описание предмета
+ */
 @Parcelize
 class BoxItem(
     val name: String,

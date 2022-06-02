@@ -14,8 +14,8 @@ class UserInteractor @Inject constructor(
     @NonNull private val prefs: SharedPreferences
 ) : IUserInteractor {
 
-    override fun getUserCredentials(uid: String, phone: String): Single<User> {
-        return repository.getUser(uid, phone).map { user ->
+    override fun getUserCredentials(token: String, phone: String): Single<User> {
+        return repository.getUser(token, phone).map { user ->
             prefs
                 .edit()
                 .putString(PrefsKeys.UID, user.uid)

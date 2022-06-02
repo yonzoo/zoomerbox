@@ -11,6 +11,12 @@ import com.zoomerbox.databinding.ItemBoxItemBinding
 import com.zoomerbox.model.app.BoxItem
 import com.zoomerbox.presentation.view.activity.BoxItemActivity
 
+/**
+ * Адаптер, который умеет отображать список предметов бокса
+ *
+ * @param boxItemList список предметов бокса
+ * @param boxName название бокса
+ */
 class BoxItemListAdapter(
     private var boxItemList: List<BoxItem>,
     private var boxName: String

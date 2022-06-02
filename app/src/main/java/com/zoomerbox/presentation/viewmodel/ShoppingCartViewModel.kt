@@ -12,6 +12,14 @@ import com.zoomerbox.model.app.ShoppingCartItem
 import com.zoomerbox.presentation.view.util.ISchedulersProvider
 import io.reactivex.disposables.Disposable
 
+/**
+ *
+ * ViewModel для экрана корзины
+ *
+ * @param shoppingCartRepository репозиторий с данными для корзины
+ * @param favouriteRepository репозиторий с избранными боксами
+ * @param schedulersProvider провайдер доступа к потокам
+ */
 class ShoppingCartViewModel(
     @NonNull private val shoppingCartRepository: IShoppingCartRepository,
     @NonNull private val favouriteRepository: IFavouriteRepository,
