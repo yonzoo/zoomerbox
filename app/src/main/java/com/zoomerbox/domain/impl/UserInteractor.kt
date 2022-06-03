@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.annotation.NonNull
 import com.zoomerbox.data.repository.IUserRepository
 import com.zoomerbox.domain.IUserInteractor
+import com.zoomerbox.model.app.Token
 import com.zoomerbox.model.app.User
 import com.zoomerbox.model.util.PrefsKeys
 import io.reactivex.Single
@@ -14,8 +15,8 @@ class UserInteractor @Inject constructor(
     @NonNull private val prefs: SharedPreferences
 ) : IUserInteractor {
 
-    override fun getUserCredentials(token: String, phone: String): Single<User> {
-        return repository.getUser(token, phone).map { user ->
+    override fun getUser(): Single<User> {
+        return repository.getUser().map { user ->
             prefs
                 .edit()
                 .putString(PrefsKeys.UID, user.uid)
@@ -24,6 +25,16 @@ class UserInteractor @Inject constructor(
                 .putString(PrefsKeys.AVATAR_URL, user.avatarUrl)
                 .apply()
             user
+        }
+    }
+
+    override fun getToken(token: String, phone: String): Single<Token> {
+        return repository.getToken(token, phone).map { tokenModel ->
+            prefs
+                .edit()
+                .putString(PrefsKeys.TOKEN, tokenModel.token)
+                .apply()
+            tokenModel
         }
     }
 }

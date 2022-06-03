@@ -1,13 +1,14 @@
 package com.zoomerbox.data.repository
 
-import com.zoomerbox.data.utils.exception.RequestFailedException
+import com.zoomerbox.model.app.Token
 import com.zoomerbox.model.app.User
 import io.reactivex.Single
 
 interface IUserRepository {
 
-    @Throws(RequestFailedException::class)
-    fun getUser(token: String, phoneNumber: String): Single<User>
+    fun getUser(): Single<User>
+
+    fun getToken(token: String, phoneNumber: String): Single<Token>
 
     fun getUserFromPreferences(uid: String?, phoneNumber: String?): Single<User>
 

@@ -1,10 +1,12 @@
 package com.zoomerbox.di.module
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.zoomerbox.data.provider.remote.service.*
+import com.zoomerbox.data.utils.interceptor.RequestInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -37,14 +39,15 @@ class ApiModule {
     @Provides
     @Singleton
     internal fun provideOkhttpClient(
-        cache: Cache
+        cache: Cache,
+        preferences: SharedPreferences
     ): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
 
         val httpClient = OkHttpClient.Builder()
         httpClient.cache(cache)
-//        httpClient.addInterceptor(RequestInterceptor())
+        httpClient.addInterceptor(RequestInterceptor(preferences))
         httpClient.addInterceptor(logging)
         httpClient.connectTimeout(15, TimeUnit.SECONDS)
         httpClient.readTimeout(15, TimeUnit.SECONDS)

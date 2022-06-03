@@ -27,6 +27,7 @@ class DefaultViewModel(
     private val errorLiveData = MutableLiveData<Throwable>()
     private val userLiveData = MutableLiveData<User>()
     private var disposable: Disposable? = null
+    private var userDisposable: Disposable? = null
 
     fun authenticate() {
         val user = FirebaseAuth.getInstance().currentUser
@@ -52,25 +53,28 @@ class DefaultViewModel(
     }
 
     private fun getUserCredentials(token: String, phoneNumber: String) {
-        disposable =
-            interactor.getUserCredentials(token, phoneNumber)
-                .doOnSubscribe { progressLiveData.postValue(true) }
-                .doOnTerminate { progressLiveData.postValue(false) }
-                .subscribeOn(schedulersProvider.io())
-                .observeOn(schedulersProvider.ui())
-                .subscribe({ result ->
-                    Log.d(
-                        TAG,
-                        "Successfully got user data: $result"
-                    )
-                    userLiveData.postValue(result)
-                }, { ex ->
-                    Log.e(
-                        TAG,
-                        "Failed to get user data with exception: $ex"
-                    )
-                    errorLiveData.postValue(ex)
-                })
+        disposable = interactor.getToken(token, phoneNumber)
+            .doOnSubscribe { progressLiveData.postValue(true) }
+            .subscribeOn(schedulersProvider.io())
+            .observeOn(schedulersProvider.ui())
+            .subscribe({ result ->
+                Log.d(TAG, "Successfully got user data: $result")
+                userDisposable = interactor.getUser()
+                    .doOnSubscribe { progressLiveData.postValue(true) }
+                    .doOnTerminate { progressLiveData.postValue(false) }
+                    .subscribeOn(schedulersProvider.io())
+                    .observeOn(schedulersProvider.ui())
+                    .subscribe({ result ->
+                        Log.d(TAG, "Successfully got user data: $result")
+                        userLiveData.postValue(result)
+                    }, { ex ->
+                        Log.e(TAG, "Failed to get user data with exception: $ex")
+                        errorLiveData.postValue(ex)
+                    })
+            }, { ex ->
+                Log.e(TAG, "Failed to get token with exception: $ex")
+                errorLiveData.postValue(ex)
+            })
     }
 
     override fun onCleared() {
